@@ -22,19 +22,19 @@ class FirebaseLogin extends Component {
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
-      signInSuccess: () => false
+      signInSuccessWithAuthResult: () => false
     }
   };
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user });
-      console.log("user", user);
+      // console.log("user", user);
     });
   }
 
   render() {
-    console.log(firebase.auth()) // view user info we have available to work with
+    console.log(firebase.auth()); // view user info we have available to work with
     return (
       <div>
         <h1>Firebase Login Page</h1>
@@ -43,10 +43,7 @@ class FirebaseLogin extends Component {
             <div>Signed In!</div>
             <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
             <h3>Welcome {firebase.auth().currentUser.displayName}</h3>
-            <img
-              alt="profile picture"
-              src={firebase.auth().currentUser.photoURL}
-            />
+            <img alt="profile" src={firebase.auth().currentUser.photoURL} />
           </span>
         ) : (
           <StyledFirebaseAuth
