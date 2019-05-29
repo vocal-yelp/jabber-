@@ -21,7 +21,7 @@ module.exports = {
       firebase
         .firestore()
         .collection("audio")
-        .add({ name: req.body.name })
+        .add({ name: req.body.name, uid: req.body.uid })
         // .set(
         //   {
         //     name: req.body.name

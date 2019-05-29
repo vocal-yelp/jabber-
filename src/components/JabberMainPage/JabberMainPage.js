@@ -4,6 +4,7 @@ import firebase from '../firebase/index';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 const storage = firebase.storage();
 const auth = firebase.auth();
 
@@ -44,23 +45,28 @@ stopRecording(e) {
 }
 
 async saveAudio() {
+const uid = firebase.auth().currentUser.uid;
+const name = firebase.auth().currentUser.displayName;
+const date = new Date();
+console.log(date);
 const blob = await new Blob(this.chunks, {type: 'audio/webm'}); console.log(blob);
 const blobURL = window.URL.createObjectURL(blob);
 this.setState({blob, blobURL})
-storage.ref("audio").put(this.state.blob)    
-const uploadBlob = storage.ref(`audio`).put(this.state.blob);
+// storage.ref("audio").put(this.state.blob)    
+const uploadBlob = storage.ref("audio/").child(`${name}: ${uid}/${date}`).put(this.state.blob);
 uploadBlob.on("state_changed", () => null, error => { console.log(error) },
-      () => {
-        axios
-          .post("/api/sendBlob", {
-            name: firebase.auth().currentUser.displayName
-          })
-          .then(response => {
-            console.log(response);
-          });
-      }
-    );
-  }
+    () => {
+      axios
+        .post("/api/sendBlob", {
+          name,
+          uid
+        })
+        .then(response => {
+          console.log(response);
+      });
+    }
+  );
+}
   
 pause() {
     const {recordStatus} = this.state
@@ -81,7 +87,7 @@ pause() {
         <div className={styles.logo}>
             <h1>Jabber</h1>
             {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : <h3> Hello, guest! </h3>}
-            <img src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png"/>
+            <img src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png" alt="lips"/>
         </div>
         <div className={styles.recorder_area}>
             <audio controls src={this.state.blobURL}> Video stream not available. </audio>
@@ -102,7 +108,7 @@ pause() {
         </div>
             {recording ? (<h3>Recording...</h3>) : <h3>Not Recording Yet</h3>}
         <div className={styles.map_box}>
-            <img src="https://www.kulud-pharmacy.com/wp-content/uploads/2018/01/687474703a2f2f692e696d6775722e636f6d2f4f32454f4378662e706e67.png"/>
+            <img src="https://www.kulud-pharmacy.com/wp-content/uploads/2018/01/687474703a2f2f692e696d6775722e636f6d2f4f32454f4378662e706e67.png" alt=""/>
         </div>
       </div>
     );
