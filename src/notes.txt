@@ -29,3 +29,5 @@ folderReturn.getDownloadURL().then(res => {
 });
 uploadBlob.on("state_changed", () => null, error => { console.log(error) },
   );
+
+  // const blobURL = window.URL.createObjectURL(blob);
