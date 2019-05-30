@@ -16,14 +16,35 @@ firebase.initializeApp({
 
 module.exports = {
   sendBlob: (req, res) => {
-    const { name, uid, URL } = req.body;
+    const { name, uid, date, URL } = req.body;
     console.log(req.body.blobURL);
     firebase
       .firestore()
       .collection("audio/")
-      .add({ name, uid, URL })
-      .then(res => {
-        console.log("this:", res);
-      });
+      .doc(`${date}: ${uid}`)
+      .set({ name, uid, date, URL });
+  },
+
+  loadAudio: (req, response) => {
+    const clips = [];
+    firebase
+      .firestore()
+      .collection("audio/")
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+          clips.push(doc.data());
+        });
+      })
+      .then(req => response.json(clips));
+    console.log(clips);
+  },
+
+  deleteJab: (req, res) => {
+    firebase
+      .firestore()
+      .collection("audio/")
+      .doc(req.params.id)
+      .delete();
   }
 };
