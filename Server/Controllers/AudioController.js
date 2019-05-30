@@ -16,13 +16,14 @@ firebase.initializeApp({
 
 module.exports = {
   sendBlob: (req, res) => {
+    const { name, uid, URL } = req.body;
     console.log(req.body.blobURL);
     firebase
       .firestore()
-      .collection("audio")
-      .add({ name: req.body.name, uid: req.body.uid })
-      .then(response => {
-        res.sendStatus(200);
+      .collection("audio/")
+      .add({ name, uid, URL })
+      .then(res => {
+        console.log("this:", res);
       });
   }
 };

@@ -18,6 +18,20 @@ export default class JabberMainPage extends Component {
       blobURL: ""
     };
   }
+  // componentDidMount() {
+  //   const folderReturn = storage.ref(
+  //     "audio/Adam Mckenzie: fzQyFSyWg7Nh7VokTioTp1gBO502/Wed May 29 2019 16:24:46 GMT-0500 (Central Daylight Time)"
+  //   );
+  //   // .child("Adam Mckenzie: fzQyFSyWg7Nh7VokTioTp1gBO502");
+  //   console.log("folder log", folderReturn);
+  //   const child = folderReturn.child(
+  //     "Wed May 29 2019 16:24:46 GMT-0500 (Central Daylight Time)"
+  //   );
+  //   console.log(child);
+  //   folderReturn.getDownloadURL().then(res => {
+  //     console.log(res);
+  //   });
+  // }
 
   async startUpMedia() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -43,20 +57,23 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: false });
     this.saveAudio();
   }
-
   async saveAudio() {
     const uid = firebase.auth().currentUser.uid;
     const name = firebase.auth().currentUser.displayName;
-    const date = new Date();
+    const date = new Date().toString().substr(0, 21);
+    console.log(date);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
     console.log(blob);
-    const blobURL = window.URL.createObjectURL(blob);
-    this.setState({ blob, blobURL });
-    // storage.ref("audio/").put(this.state.blob);
+    this.setState({ blob });
     const uploadBlob = storage
       .ref("audio/")
       .child(`${name}: ${uid}/${date}`)
       .put(this.state.blob);
+    // const storageDate = storage.ref(`audio/${name}: ${uid}/`).child
+    const folderReturn = storage.ref(
+      "audio/Adam Mckenzie: fzQyFSyWg7Nh7VokTioTp1gBO502/Wed May 29 2019 22:14:03 GMT-0500 (Central Daylight Time)"
+    );
+    folderReturn.getDownloadURL().then(res => this.setState({ URL: res }));
     uploadBlob.on(
       "state_changed",
       () => null,
@@ -67,11 +84,10 @@ export default class JabberMainPage extends Component {
         axios
           .post("/api/sendBlob", {
             name,
-            uid
+            uid,
+            URL: this.state.URL
           })
-          .then(response => {
-            console.log(response);
-          });
+          .then(response => console.log(response));
       }
     );
   }
