@@ -17,25 +17,13 @@ firebase.initializeApp({
 
 module.exports = {
     sendBlob: (req, res) => {
-      console.log(req.body.blobURL);
+      const { name, uid, URL } = req.body;
       firebase
         .firestore()
-        .collection("audio")
-        .add({ name: req.body.name, uid: req.body.uid })
-        // .set(
-        //   {
-        //     name: req.body.name
-        //   },
-        //   { merge: true }
-        // )
-        .then(response => {
-          res.sendStatus(200);
+        .collection(`audio/`)
+        .add({ name, uid, URL })
+        .then(res => {
+          console.log("All done.")
     });
   },
-
-  getFileNum: (res, req) => {
-    firebase.database().ref("audio").once('value').then( res => {
-      console.log(res.val().audio_size.length - 1)
-    })
-  }
 };

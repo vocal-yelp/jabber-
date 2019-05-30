@@ -17,6 +17,7 @@ export default class JabberMainPage extends Component {
       recordStatus: "Pause",
       blob: "",
       blobURL: "",
+      URL
   };
 }
 
@@ -48,25 +49,26 @@ async saveAudio() {
 const uid = firebase.auth().currentUser.uid;
 const name = firebase.auth().currentUser.displayName;
 const date = new Date();
-console.log(date);
+console.log(date)
 const blob = await new Blob(this.chunks, {type: 'audio/webm'}); console.log(blob);
-const blobURL = window.URL.createObjectURL(blob);
-this.setState({blob, blobURL})
-// storage.ref("audio").put(this.state.blob)    
+this.setState({blob}) 
 const uploadBlob = storage.ref("audio/").child(`${name}: ${uid}/${date}`).put(this.state.blob);
+// const storageDate = storage.ref(`audio/${name}: ${uid}/`).child
+const folderReturn = storage.ref("audio/Peter Willoughby Hart: Y9ukM0x1WQcSQaprVfmlQ3ALXca2/Wed May 29 2019 23:18:38 GMT-0500 (Central Daylight Time)");
+console.log(`audio/${name}: ${uid}/${date}`)
+folderReturn.getDownloadURL().then(res => this.setState({URL: res}));
 uploadBlob.on("state_changed", () => null, error => { console.log(error) },
-    () => {
-      axios
-        .post("/api/sendBlob", {
-          name,
-          uid
-        })
-        .then(response => {
-          console.log(response);
-      });
+  () => {
+    axios
+    .post("/api/sendBlob", {
+      name,
+      uid,
+      URL: this.state.URL
+    }).then(response => console.log(response)).catch(err => console.log(err));
     }
   );
 }
+// const blobURL = window.URL.createObjectURL(blob);
   
 pause() {
     const {recordStatus} = this.state
