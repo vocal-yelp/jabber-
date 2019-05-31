@@ -15,36 +15,66 @@ firebase.initializeApp({
 // const firestorage = firebase.storage();
 
 module.exports = {
-  sendBlob: (req, res) => {
+  sendUserInfo: (req, res) => {
     const { name, uid, date, URL } = req.body;
-    console.log(req.body.blobURL);
     firebase
       .firestore()
-      .collection("audio/")
-      .doc(`${date}: ${uid}`)
-      .set({ name, uid, date, URL });
+      .collection(`user/`)
+      .doc(`${uid}`)
+      .collection(`clips/`)
+      .doc(`${date}`)
+      .set({ name, uid, date, URL })
+      .then(res => {
+        console.log("All done.");
+      });
   },
 
-  loadAudio: (req, response) => {
+  loadJabs: (req, response) => {
     const clips = [];
     firebase
       .firestore()
-      .collection("audio/")
+      .collectionGroup("clips")
       .get()
       .then(snap => {
         snap.forEach(doc => {
           clips.push(doc.data());
         });
       })
-      .then(req => response.json(clips));
+      .then(res => response.json(clips))
+      .catch(err => console.log(err));
     console.log(clips);
   },
 
-  deleteJab: (req, res) => {
+  loadUserJabs: (req, response) => {
+    const uid = req.params.id;
+    const clips = [];
+    firebase
+      .firestore()
+      .collection("user/")
+      .doc(`${uid}`)
+      .collection("clips")
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+          clips.push(doc.data());
+        });
+      })
+      .then(res => response.json(clips))
+      .catch(err => console.log(err));
+    console.log(clips);
+  },
+
+  deleteJab: (req, response) => {
+    console.log("hit");
+    console.log(req.params.id);
     firebase
       .firestore()
       .collection("audio/")
       .doc(req.params.id)
-      .delete();
+      .delete()
+      .then(res => {
+        console.log("yes");
+      })
+      .catch(err => console.log("no"));
   }
 };

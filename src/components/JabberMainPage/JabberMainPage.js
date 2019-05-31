@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
-import LoadAudio from "../LoadAudio/LoadAudio";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import LoadJabs from "../LoadJabs/LoadJabs";
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -16,7 +16,8 @@ export default class JabberMainPage extends Component {
       recording: false,
       recordStatus: "Pause",
       blob: "",
-      blobURL: ""
+      blobURL: "",
+      URL
     };
   }
 
@@ -44,6 +45,7 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: false });
     this.saveAudio();
   }
+
   async saveAudio() {
     const uid = firebase.auth().currentUser.uid;
     const name = firebase.auth().currentUser.displayName;
@@ -56,14 +58,15 @@ export default class JabberMainPage extends Component {
       .ref("audio/")
       .child(`${name}: ${uid}/${date}`)
       .put(this.state.blob);
+
     const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
-    console.log(`audio/${name}: ${uid}/${date}`);
+
     folderReturn.getDownloadURL().then(res => {
       axios
-        .post("/api/sendBlob", {
+        .post("/api/sendUserInfo", {
           name,
-          date,
           uid,
+          date,
           URL: res
         })
         .then(response => console.log(response))
@@ -86,19 +89,16 @@ export default class JabberMainPage extends Component {
   }
 
   render() {
+    console.log(auth.currentUser);
     const { recording } = this.state;
     return (
       <div className="camera">
         <div className={styles.logo}>
           <h1>Jabber</h1>
-          {auth.currentUser ? (
-            <h3>{auth.currentUser.displayName}</h3>
-          ) : (
-            <h3> Hello, guest! </h3>
-          )}
+          {auth.currentUser ? <h3>{auth.currentUser.displayName}</h3> : null}
           <img
             src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png"
-            alt=""
+            alt="lips"
           />
         </div>
         <div className={styles.recorder_area}>
@@ -131,13 +131,8 @@ export default class JabberMainPage extends Component {
             </div>
           )}
         </div>
-        {recording ? <h3>Recording...</h3> : <h3>Not Recording Yet</h3>}
-        <div className={styles.map_box}>
-          <img
-            src="https://www.kulud-pharmacy.com/wp-content/uploads/2018/01/687474703a2f2f692e696d6775722e636f6d2f4f32454f4378662e706e67.png"
-            alt=""
-          />
-        </div>
+        {recording ? <h3>Recording...</h3> : null}
+        <LoadJabs />
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import styles from "./ProfilePage.module.scss";
-import LoadAudio from "../LoadAudio/LoadAudio";
+import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
 
 class ProfilePage extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {};
   }
@@ -13,14 +13,13 @@ class ProfilePage extends Component {
     return (
       <div>
         <div className={styles.delete_icon}>
-          <h1>Your Jabs</h1>
+          <h1>Delete Your Jabs</h1>
           <img
             src="https://images.vexels.com/media/users/3/158148/isolated/preview/9043e523c85dcaeb815975c32cffd879-sad-open-mouth-icon-by-vexels.png"
             alt=""
           />
         </div>
-        <h3>View Audio in List View:</h3>
-        <LoadAudio />
+        <LoadUserJabs />
       </div>
     );
   }
