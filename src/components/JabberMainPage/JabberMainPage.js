@@ -59,7 +59,7 @@ const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
 
 folderReturn.getDownloadURL().then(res => {
     axios
-    .post("/api/sendUserJabandInfo", {
+    .post("/api/sendUserInfo", {
       name,
       uid,
       date,

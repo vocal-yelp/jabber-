@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import firebase from '../firebase/index'
+import styles from './LoadUserJabs.module.scss'
 
 const auth = firebase.auth();
 
-export default class LoadAudio extends Component {
+export default class LoadUserJabs extends Component {
     constructor(){
         super()
 
@@ -28,9 +29,10 @@ export default class LoadAudio extends Component {
     render(){
         const clips = this.state.URL.map((clip, index) => {
             return (<div key={index}>
-                <h3>{clip.name}</h3>
+                <div className={styles.user_clips} >
                 <audio controls src={clip.URL}/>
                 <button onClick={() => this.deleteJab(clip.date)}>X</button>
+                </div>
                 <h6>{clip.date}</h6>
                 </div>)
         })

@@ -16,7 +16,7 @@ firebase.initializeApp({
 // const firestorage = firebase.storage();
 
 module.exports = {
-    sendUserJabandInfo: (req, res) => {
+    sendUserInfo: (req, res) => {
       const { name, uid, date, URL } = req.body;
       firebase
         .firestore()

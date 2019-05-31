@@ -4,7 +4,7 @@ import firebase from '../firebase/index'
 
 const auth = firebase.auth();
 
-export default class LoadAudio extends Component {
+export default class LoadJabs extends Component {
     constructor(){
         super()
 
