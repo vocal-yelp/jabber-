@@ -1,0 +1,83 @@
+// .div1 {
+//   background: url("./../Pics/bg1.png");
+//   background-size: cover;
+// }
+
+// .div2 {
+//   background: solid black;
+// }
+
+.Login {
+  // background: rgba(255, 236, 242, 0.74);
+  background: url("../Pics/pattern1.png");
+  background-size: cover;
+  // opacity: 0.3;
+  border: 1px solid rgba(15, 15, 15, 0.39);
+  width: 65vw;
+  height: 80vh;
+  border-radius: 10px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  h1 {
+    margin-top: 10%;
+    color: rgb(238, 238, 238);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 50;
+  }
+}
+.Icon {
+  height: 25vh;
+}
+
+@media (max-width: 800px) {
+  .div1 {
+    background: rgb(244, 239, 255);
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .Login {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  h3 {
+    font-size: 150%;
+    font-weight: 100;
+    color: rgb(255, 255, 255);
+  }
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    color: rgb(255, 255, 255);
+  }
+  .signOut {
+    border: 1px solid rgba(105, 105, 105, 0.452);
+    background-color: rgb(26, 26, 26);
+    height: 6%;
+    width: 40%;
+    border-radius: 10px;
+    font-size: 120%;
+    color: rgb(226, 226, 226);
+    font-weight: 100;
+  }
+
+  .div2 {
+    background: rgb(56, 56, 56);
+  }
+  .profilePic {
+    height: 20vh;
+    border-radius: 10px;
+  }
+  .Icon2 {
+    height: 16vh;
+    // border: 1px solid black;
+    margin: 5%;
+  }
+}
