@@ -6,11 +6,12 @@ app.use(express.json());
 
 const { SERVER_PORT } = process.env;
 
-const { sendBlob, loadAudio, deleteJab } = require("./Controllers/AudioController");
+const { sendUserJabandInfo, loadJabs, loadUserJabs, deleteJab } = require("./Controllers/AudioController");
 
 /////////////// Audio //////////////////////////
-app.post("/api/sendBlob", sendBlob);
-app.get('/api/loadAudio', loadAudio);
+app.post("/api/sendUserJabandInfo", sendUserJabandInfo);
+app.get('/api/loadJabs', loadJabs);
+app.get('/api/loadUserJabs/:id', loadUserJabs);
 app.delete("/api/deleteJab/:id", deleteJab)
 
 app.listen(SERVER_PORT, () => {

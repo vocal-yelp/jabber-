@@ -3,7 +3,7 @@ import styles from './JabberMainPage.module.scss';
 import firebase from '../firebase/index';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import LoadAudio from '../LoadAudio/LoadAudio';
+import LoadJabs from '../LoadJabs/LoadJabs';
 
 
 const storage = firebase.storage();
@@ -59,14 +59,13 @@ const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
 
 folderReturn.getDownloadURL().then(res => {
     axios
-    .post("/api/sendBlob", {
+    .post("/api/sendUserJabandInfo", {
       name,
       uid,
       date,
       URL: res
     }).then(response => console.log(response)).catch(err => console.log(err));
 })
-window.location.reload()
 }
 
 pause() {
@@ -82,12 +81,13 @@ pause() {
   
   
   render() {
+    console.log(auth.currentUser)
     const {recording} = this.state;
         return (
           <div className="camera">
         <div className={styles.logo}>
             <h1>Jabber</h1>
-            {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : <h3> Hello, guest! </h3>}
+            {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
             <img src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png" alt="lips"/>
         </div>
         <div className={styles.recorder_area}>
@@ -106,11 +106,8 @@ pause() {
             </section>
             : <div><h2>Please login to record your own jabs </h2><Link to="/"><h3>Here:</h3></Link></div>}
         </div>
-            {recording ? (<h3>Recording...</h3>) : <h3>Not Recording Yet</h3>}
-        {/* <div className={styles.map_box}>
-            <img src="https://www.kulud-pharmacy.com/wp-content/uploads/2018/01/687474703a2f2f692e696d6775722e636f6d2f4f32454f4378662e706e67.png" alt=""/>
-        </div> */}
-        <LoadAudio/>
+            {recording ? (<h3>Recording...</h3>) : null}
+        <LoadJabs/>
       </div>
     );
   }

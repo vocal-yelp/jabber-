@@ -13,7 +13,7 @@ export default class LoadAudio extends Component {
         }
     }
     componentDidMount(){
-        axios.get("/api/loadAudio").then( res => {
+        axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then( res => {
             console.log(res.data)
            this.setState({URL: res.data})
         })

@@ -16,21 +16,34 @@ firebase.initializeApp({
 // const firestorage = firebase.storage();
 
 module.exports = {
-    sendBlob: (req, res) => {
+    sendUserJabandInfo: (req, res) => {
       const { name, uid, date, URL } = req.body;
       firebase
         .firestore()
-        .collection(`audio/`)
-        .doc(`${date}: ${uid}`)
+        .collection(`user/`)
+        .doc(`${uid}`)
+        .collection(`clips/`)
+        .doc(`${date}`)
         .set({ name, uid, date, URL })
         .then(res => {
           console.log("All done.")
     });
   },
 
-  loadAudio: (req, response) => {
+  loadJabs: (req, response) => {
     const clips = []
-    firebase.firestore().collection(`audio/`).get().then(snap => {
+    firebase.firestore().collectionGroup('clips').get().then(snap => {
+      snap.forEach(doc => {
+        clips.push(doc.data())
+      })
+    }).then(res => response.json(clips)).catch(err => console.log(err))
+    console.log(clips)
+  },
+
+  loadUserJabs: (req, response) => {
+    const uid = req.params.id;
+    const clips = []
+    firebase.firestore().collection('user/').doc(`${uid}`).collection('clips').get().then(snap => {
       snap.forEach(doc => {
         clips.push(doc.data())
       })
