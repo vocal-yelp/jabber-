@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import firebase from "../firebase/index";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import styles from "./../FirebaseLogin/FirebaseLogin.module.scss";
+import Icon from "../Pics/jabber-Icon.png";
+import Icon2 from "../Pics/jabber-app.png";
 
 // firebase.initializeApp({
 //   apiKey: "AIzaSyA0ifb48V1SfOyaVN4wc11PDf0LvQYVKvU",
 //   authDomain: "jabber-dm22.firebaseapp.com"
 // });
+
+const auth = firebase.auth();
+const storage = firebase.auth();
 
 class FirebaseLogin extends Component {
   constructor() {
