@@ -22,7 +22,7 @@ class FirebaseLogin extends Component {
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
-      signInSuccess: () => false
+      signInSuccessWithAuthResult: () => false
     }
   };
 
@@ -44,7 +44,7 @@ class FirebaseLogin extends Component {
             <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
             <h3>Welcome {firebase.auth().currentUser.displayName}</h3>
             <img
-              alt="profile picture"
+              alt="profile"
               src={firebase.auth().currentUser.photoURL}
             />
           </span>

@@ -1,0 +1,18 @@
+@import '../SassMixinsandVariables.scss';
+
+.user_clips {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 80%;
+    margin-left: 10%;
+
+    button {
+        height: 2em;
+        width: 2em;
+        background-color: $JabberBlue;
+        color: white;
+        border: none;
+    }
+}

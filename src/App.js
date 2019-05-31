@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Routes from './routes';
-import {HashRouter, Link} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import AppNavigation from './components/AppNavigation/AppNavigation';
 
 function App() {

@@ -5,3 +5,29 @@
 //       console.log(num)
 //   })
 // }
+
+// .set(
+//   {
+//     name: req.body.name
+//   },
+//   { merge: true }
+// )
+
+getFileNum: (res, req) => {
+firebase.database().ref("audio").once('value').then( res => {
+console.log(res.val().audio_size.length - 1)
+})
+}
+
+folderReturn.getDownloadURL().then(res => {
+  axios
+    .post("/api/sendBlob", {
+      name,
+      uid,
+      URL: res
+    }).then(response => console.log(response));
+});
+uploadBlob.on("state_changed", () => null, error => { console.log(error) },
+  );
+
+  // const blobURL = window.URL.createObjectURL(blob);
