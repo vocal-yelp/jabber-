@@ -2,7 +2,6 @@ const firebase = require("firebase");
 // const storage = require('firebase/storage')
 // const firebase = require('../../src/components/firebase/index')
 
-
 firebase.initializeApp({
   apiKey: process.env.API_KEY,
   authDomain: process.env.AUTH_DOMAIN,
@@ -16,26 +15,66 @@ firebase.initializeApp({
 // const firestorage = firebase.storage();
 
 module.exports = {
-    sendBlob: (req, res) => {
-      console.log(req.body.blobURL);
-      firebase
-        .firestore()
-        .collection("audio")
-        .add({ name: req.body.name })
-        // .set(
-        //   {
-        //     name: req.body.name
-        //   },
-        //   { merge: true }
-        // )
-        .then(response => {
-          res.sendStatus(200);
-    });
+  sendUserInfo: (req, res) => {
+    const { name, uid, date, URL } = req.body;
+    firebase
+      .firestore()
+      .collection(`user/`)
+      .doc(`${uid}`)
+      .collection(`clips/`)
+      .doc(`${date}`)
+      .set({ name, uid, date, URL })
+      .then(res => {
+        console.log("All done.");
+      });
   },
 
-  getFileNum: (res, req) => {
-    firebase.database().ref("audio").once('value').then( res => {
-      console.log(res.val().audio_size.length - 1)
-    })
+  loadJabs: (req, response) => {
+    const clips = [];
+    firebase
+      .firestore()
+      .collectionGroup("clips")
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+          clips.push(doc.data());
+        });
+      })
+      .then(res => response.json(clips))
+      .catch(err => console.log(err));
+    console.log(clips);
+  },
+
+  loadUserJabs: (req, response) => {
+    const uid = req.params.id;
+    const clips = [];
+    firebase
+      .firestore()
+      .collection("user/")
+      .doc(`${uid}`)
+      .collection("clips")
+      .get()
+      .then(snap => {
+        snap.forEach(doc => {
+          clips.push(doc.data());
+        });
+      })
+      .then(res => response.json(clips))
+      .catch(err => console.log(err));
+    console.log(clips);
+  },
+
+  deleteJab: (req, response) => {
+    console.log("hit");
+    console.log(req.params.id);
+    firebase
+      .firestore()
+      .collection("audio/")
+      .doc(req.params.id)
+      .delete()
+      .then(res => {
+        console.log("yes");
+      })
+      .catch(err => console.log("no"));
   }
 };
