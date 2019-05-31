@@ -3,9 +3,8 @@ import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import logo2 from "../Pics/logo2.png";
+import LoadJabs from "../LoadJabs/LoadJabs";
 import recordButton from "./../Pics/recordButton.png";
-import { tsConstructSignatureDeclaration } from "@babel/types";
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -20,7 +19,8 @@ export default class JabberMainPage extends Component {
       recording: false,
       recordStatus: "Pause",
       blob: "",
-      blobURL: ""
+      blobURL: "",
+      URL
     };
   }
 
@@ -52,33 +52,29 @@ export default class JabberMainPage extends Component {
   async saveAudio() {
     const uid = firebase.auth().currentUser.uid;
     const name = firebase.auth().currentUser.displayName;
-    const date = new Date();
+    const date = new Date().toString().substr(0, 24);
+    console.log(date);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
     console.log(blob);
-    const blobURL = window.URL.createObjectURL(blob);
-    this.setState({ blob, blobURL });
-    // storage.ref("audio/").put(this.state.blob);
-    const uploadBlob = storage
+    this.setState({ blob });
+    await storage
       .ref("audio/")
       .child(`${name}: ${uid}/${date}`)
       .put(this.state.blob);
-    uploadBlob.on(
-      "state_changed",
-      () => null,
-      error => {
-        console.log(error);
-      },
-      () => {
-        axios
-          .post("/api/sendBlob", {
-            name,
-            uid
-          })
-          .then(response => {
-            console.log(response);
-          });
-      }
-    );
+
+    const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
+
+    folderReturn.getDownloadURL().then(res => {
+      axios
+        .post("/api/sendUserInfo", {
+          name,
+          uid,
+          date,
+          URL: res
+        })
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
+    });
   }
 
   pause() {
@@ -90,24 +86,25 @@ export default class JabberMainPage extends Component {
     }
     if (recordStatus === "Resume") {
       this.mediaRecorder.resume();
+    }
+    if (recordStatus === "Resume") {
+      this.mediaRecorder.resume();
     } else {
       this.mediaRecorder.pause();
     }
   }
   render() {
+    console.log(auth.currentUser);
     const { recording } = this.state;
     return (
       <div className="camera">
         <div className={styles.logo}>
-          <img src={logo2} className={styles.logo2} />
-          {auth.currentUser ? (
-            <spam>
-              <h2 className={styles.greeting}>Hello,</h2>
-              <h3>{auth.currentUser.displayName}</h3>
-            </spam>
-          ) : (
-            <h3> Hello, guest! </h3>
-          )}
+          <h1>Jabber</h1>
+          {auth.currentUser ? <h3>{auth.currentUser.displayName}</h3> : null}
+          <img
+            src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png"
+            alt="lips"
+          />
         </div>
         <div className={styles.recorder_area}>
           <audio controls src={this.state.blobURL}>
@@ -142,13 +139,8 @@ export default class JabberMainPage extends Component {
             </div>
           )}
         </div>
-        {recording ? <h3>Recording...</h3> : <h3>Not Recording Yet</h3>}
-        <div className={styles.map_box}>
-          <img
-            src="https://www.kulud-pharmacy.com/wp-content/uploads/2018/01/687474703a2f2f692e696d6775722e636f6d2f4f32454f4378662e706e67.png"
-            alt=""
-          />
-        </div>
+        {recording ? <h3>Recording...</h3> : null}
+        <LoadJabs />
       </div>
     );
   }
