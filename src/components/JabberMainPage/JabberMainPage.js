@@ -4,10 +4,7 @@ import firebase from "../firebase/index";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import LoadJabs from "../LoadJabs/LoadJabs";
-<<<<<<< HEAD
-=======
 import recordButton from "./../Pics/recordButton.png";
->>>>>>> master
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -86,12 +83,9 @@ export default class JabberMainPage extends Component {
       this.setState({ recordStatus: "Resume" });
     } else {
       this.setState({ recordStatus: "Pause" });
-<<<<<<< HEAD
-=======
     }
     if (recordStatus === "Resume") {
       this.mediaRecorder.resume();
->>>>>>> master
     }
     if (recordStatus === "Resume") {
       this.mediaRecorder.resume();
@@ -99,10 +93,6 @@ export default class JabberMainPage extends Component {
       this.mediaRecorder.pause();
     }
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> master
   render() {
     console.log(auth.currentUser);
     const { recording } = this.state;
@@ -124,14 +114,6 @@ export default class JabberMainPage extends Component {
           {auth.currentUser ? (
             <section className={styles.button_space}>
               {!recording ? (
-<<<<<<< HEAD
-                <>
-                  <button onClick={e => this.startUpMedia(e)}>Record</button>
-                  <button id={styles.invisible_button} />
-                </>
-              ) : (
-                <>
-=======
                 <>
                   <button onClick={e => this.startUpMedia(e)}>
                     <img className={styles.recordBtn} src={recordButton} />
@@ -141,7 +123,6 @@ export default class JabberMainPage extends Component {
                 </>
               ) : (
                 <>
->>>>>>> master
                   <button onClick={e => this.stopRecording(e)}>Submit</button>
                   <button onClick={() => this.pause()}>
                     {this.state.recordStatus}
