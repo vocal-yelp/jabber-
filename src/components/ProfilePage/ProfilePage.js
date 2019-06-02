@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import styles from "./ProfilePage.module.scss";
 import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
+import firebase from "../firebase/index";
+import axios from "axios";
 
 class ProfilePage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
   }
+
+  //   blessed = () => {
+  //     const auth = firebase.auth();
+  //     axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then(res => {
+  //       console.log(res.data);
+  //       this.setState({ URL: res.data });
+  //     });
+  //   };
 
   render() {
     return (
@@ -19,6 +29,7 @@ class ProfilePage extends Component {
             alt=""
           />
         </div>
+
         <LoadUserJabs />
       </div>
     );

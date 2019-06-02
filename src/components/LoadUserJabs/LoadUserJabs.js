@@ -13,19 +13,28 @@ export default class LoadUserJabs extends Component {
       URL: []
     };
   }
+
   componentDidMount() {
-    axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then(res => {
-      console.log(res.data);
-      this.setState({ URL: res.data });
+    firebase.auth().onAuthStateChanged(user => {
+      axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then(res => {
+        console.log(res.data);
+        this.setState({ URL: res.data });
+      });
     });
   }
 
   deleteJab = date => {
-    axios
-      .delete(`/api/deleteJab/${date}: ${auth.currentUser.uid}`)
-      .then(res => {
-        console.log(res);
-      });
+    axios.delete("/api/deleteJab/", {
+      data: { uid: auth.currentUser.uid, date: date }
+    });
+    this.getUpdate();
+  };
+
+  getUpdate = () => {
+    axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then(res => {
+      console.log(res.data);
+      this.setState({ URL: res.data });
+    });
   };
 
   render() {

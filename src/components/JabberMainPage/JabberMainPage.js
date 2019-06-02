@@ -107,19 +107,16 @@ export default class JabberMainPage extends Component {
           />
         </div>
         <div className={styles.recorder_area}>
-          <audio controls src={this.state.blobURL}>
-            {" "}
-            Video stream not available.{" "}
-          </audio>
+          <audio controls src={this.state.blobURL} />
           {auth.currentUser ? (
             <section className={styles.button_space}>
               {!recording ? (
                 <>
-                  <button onClick={e => this.startUpMedia(e)}>
-                    <img className={styles.recordBtn} src={recordButton} />
-                  </button>
-
-                  <button id={styles.invisible_button} />
+                  <img
+                    onClick={e => this.startUpMedia(e)}
+                    className={styles.recordBtn}
+                    src={recordButton}
+                  />
                 </>
               ) : (
                 <>
@@ -134,7 +131,7 @@ export default class JabberMainPage extends Component {
             <div>
               <h2>Please login to record your own jabs </h2>
               <Link to="/">
-                <h3>Here:</h3>
+                <h3>- Login -</h3>
               </Link>
             </div>
           )}
