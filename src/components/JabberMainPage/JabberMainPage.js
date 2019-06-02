@@ -55,8 +55,9 @@ export default class JabberMainPage extends Component {
     const date = new Date().toString().substr(0, 24);
     console.log(date);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
+    const blobURL = window.URL.createObjectURL(blob);
     console.log(blob);
-    this.setState({ blob });
+    this.setState({ blob, blobURL });
     await storage
       .ref("audio/")
       .child(`${name}: ${uid}/${date}`)
