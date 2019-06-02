@@ -66,14 +66,17 @@ module.exports = {
 
   deleteJab: (req, response) => {
     console.log("hit");
-    console.log(req.params.id);
+    const {uid, date} = req.body;
+    console.log(req.body);
     firebase
       .firestore()
-      .collection("audio/")
-      .doc(req.params.id)
+      .collection("user/")
+      .doc(uid)
+      .collection("clips")
+      .doc(date)
       .delete()
       .then(res => {
-        console.log("yes");
+        console.log(res, "yes");
       })
       .catch(err => console.log("no"));
   }

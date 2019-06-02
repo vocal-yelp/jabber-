@@ -9,14 +9,16 @@
 
 .Login {
   // background: rgba(255, 236, 242, 0.74);
-  background: url("../Pics/pattern1.png");
+  background: url("../Pics/dots.png");
   background-size: cover;
-  // opacity: 0.3;
   border: 1px solid rgba(15, 15, 15, 0.39);
-  width: 65vw;
-  height: 80vh;
-  border-radius: 10px;
-  margin: 0;
+  // opacity: 0.3;
+  // box-shadow: 5px 5px 10px rgb(31, 30, 30);
+  // border-radius: 10px;
+  border: 2px solid black;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 20%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -34,7 +36,7 @@
 
 @media (max-width: 800px) {
   .div1 {
-    background: rgb(244, 239, 255);
+    background: rgb(202, 246, 213);
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -43,7 +45,7 @@
   .Login {
     margin: 0;
     position: absolute;
-    top: 50%;
+    margin-top: 5vh;
     left: 50%;
     transform: translate(-50%, -50%);
   }

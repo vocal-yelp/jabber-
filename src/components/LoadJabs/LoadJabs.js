@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import firebase from '../firebase/index'
+import styles from './LoadJabs.module.scss'
 
 const auth = firebase.auth();
 
@@ -19,19 +20,15 @@ export default class LoadJabs extends Component {
         })
     }
 
-    // deleteJab = (date) => {
-    //     axios.delete(`/api/deleteJab/${date}: ${auth.currentUser.uid}`).then(res => {
-    //         console.log(res)
-    //     })
-    // }
-
     render(){
         const clips = this.state.URL.map((clip, index) => {
-            return (<div key={index}>
+            return (
+                <div key={index} className={styles.loaded}>
                 <h3>{clip.name}</h3>
                 <audio controls src={clip.URL}/>
                 <h6>{clip.date}</h6>
-                </div>)
+                </div>
+                )
         })
         return(
             <div>

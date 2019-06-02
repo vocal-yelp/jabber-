@@ -4,14 +4,14 @@
 .navbar {
   width: 100%;
   height: 5vh;
-  background-color: $JabberBlue;
-  border: 2px solid black;
+  background-color: white;
+  // border-bottom: 2px solid black;
 
   button {
     width: 33.333%;
     height: 100%;
-    background-color: $JabberBlue;
-    color: white;
+    background-color: white;
+    color: black;
     border: none;
     outline: none;
     font-size: 3vh;

@@ -55,8 +55,9 @@ export default class JabberMainPage extends Component {
     const date = new Date().toString().substr(0, 24);
     console.log(date);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
+    const blobURL = window.URL.createObjectURL(blob)
     console.log(blob);
-    this.setState({ blob });
+    this.setState({ blob, blobURL });
     await storage
       .ref("audio/")
       .child(`${name}: ${uid}/${date}`)
@@ -94,47 +95,34 @@ export default class JabberMainPage extends Component {
     }
   }
   render() {
-    console.log(auth.currentUser);
     const { recording } = this.state;
     return (
       <div className="camera">
         <div className={styles.logo}>
           <h1>Jabber</h1>
-          {auth.currentUser ? <h3>{auth.currentUser.displayName}</h3> : null}
-          <img
-            src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png"
-            alt="lips"
-          />
+          {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
+          <img src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png" alt="lips"/>
         </div>
         <div className={styles.recorder_area}>
-          <audio controls src={this.state.blobURL}>
-            {" "}
-            Video stream not available.{" "}
-          </audio>
+          <audio controls src={this.state.blobURL}/>
           {auth.currentUser ? (
-            <section className={styles.button_space}>
+          <section className={styles.button_space}>
               {!recording ? (
                 <>
-                  <button onClick={e => this.startUpMedia(e)}>
-                    <img className={styles.recordBtn} src={recordButton} />
-                  </button>
-
-                  <button id={styles.invisible_button} />
+                <img onClick={e => this.startUpMedia(e)} className={styles.recordBtn} src={recordButton} />
                 </>
               ) : (
                 <>
-                  <button onClick={e => this.stopRecording(e)}>Submit</button>
-                  <button onClick={() => this.pause()}>
-                    {this.state.recordStatus}
-                  </button>
+                <button onClick={e => this.stopRecording(e)}>Submit</button>
+                <button onClick={() => this.pause()}>{this.state.recordStatus}</button>
                 </>
               )}
-            </section>
+          </section>
           ) : (
             <div>
               <h2>Please login to record your own jabs </h2>
               <Link to="/">
-                <h3>Here:</h3>
+                <h3>- Login -</h3>
               </Link>
             </div>
           )}
