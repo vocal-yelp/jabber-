@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import LoadJabs from "../LoadJabs/LoadJabs";
 import recordButton from "./../Pics/recordButton.png";
+import MapContainer from '../MapContainer/MapContainer';
 
 const storage = firebase.storage();
 const auth = firebase.auth();
-// const uid = firebase.auth().currentUser.uid;
-// const name = firebase.auth().currentUser.displayName;
 
 export default class JabberMainPage extends Component {
   constructor(props) {
@@ -20,8 +19,27 @@ export default class JabberMainPage extends Component {
       recordStatus: "Pause",
       blob: "",
       blobURL: "",
-      URL
+      URL: "",
+      user: false,
+      lat: "",
+      lng: ""
     };
+  }
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({user: true})
+      console.log("user", user);
+    });
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   async startUpMedia() {
@@ -101,12 +119,14 @@ export default class JabberMainPage extends Component {
         <div className={styles.logo}>
           <h1>Jabber</h1>
           {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
-          <img src="https://images.vexels.com/media/users/3/158095/isolated/preview/675d732db5174565de6383cb451b20a6-open-mouth-icon-by-vexels.png" alt="lips"/>
+        </div>
+        <div className={styles.map_box}>
+          <MapContainer lat={this.state.lat} lng={this.state.lng} />
         </div>
         <div className={styles.recorder_area}>
           <audio controls src={this.state.blobURL}/>
           {auth.currentUser ? (
-          <section className={styles.button_space}>
+            <section className={styles.button_space}>
               {!recording ? (
                 <>
                 <img onClick={e => this.startUpMedia(e)} className={styles.recordBtn} src={recordButton} />
