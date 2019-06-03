@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
-import jabberPin from "../Pics/jabber-Icon.png";
+import AppNavigation from '../AppNavigation/AppNavigation';
 import Axios from "axios";
 
 const mapStyles = {
@@ -25,13 +25,22 @@ class MapContainer extends Component {
   }
 
   componentDidMount() {
-    Axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`).then(res => {
-        this.setState({lat: res.data.location.lat, lng: res.data.location.lng})
-  })
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: true });
+    });
     Axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -69,6 +78,8 @@ class MapContainer extends Component {
 
   render() {
     return (
+      <div>
+      <AppNavigation/>
       <Map
         google={this.props.google}
         style={mapStyles}
@@ -91,6 +102,7 @@ class MapContainer extends Component {
           </div>
         </InfoWindow>
       </Map>
+      </div>
     );
   }
 }

@@ -3,9 +3,7 @@ import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import LoadJabs from "../LoadJabs/LoadJabs";
-import recordButton from "./../Pics/recordButton.png";
-import MapContainer from '../MapContainer/MapContainer';
+import AppNavigation from '../AppNavigation/AppNavigation';
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -101,10 +99,10 @@ export default class JabberMainPage extends Component {
     render() {
       console.log(this.state.lat, this.state.lng)
       const { recording } = this.state;
-      
       return (
         <div className="camera">
-        <button className={styles.signOut} onClick={() => firebase.auth().signOut()}>SignOut</button>
+        <AppNavigation/>
+        {!auth.currentUser ? <Redirect to="/"/> : null}
         <div className={styles.logo}>
           <h1>Jabber</h1>
           {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}

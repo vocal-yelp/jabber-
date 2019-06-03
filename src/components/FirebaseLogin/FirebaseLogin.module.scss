@@ -1,25 +1,15 @@
-// .div1 {
-//   background: url("./../Pics/bg1.png");
-//   background-size: cover;
-// }
-
-// .div2 {
-//   background: solid black;
-// }
 
 .Login {
-  // background: rgba(255, 236, 242, 0.74);
-  background: url("https://images.unsplash.com/photo-1470754260170-299cad39501f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.4)
+  ), url("https://images.unsplash.com/photo-1470754260170-299cad39501f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
   background-size: cover;
   background-position: center;
   border: 1px solid rgba(15, 15, 15, 0.39);
-  // opacity: 0.3;
-  // box-shadow: 5px 5px 10px rgb(31, 30, 30);
-  // border-radius: 10px;
   border: 2px solid black;
   width: 100vw;
   height: 110vh;
-  margin-top: 20%;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -31,6 +21,7 @@
     font-weight: 50;
   }
 }
+
 .Icon {
   height: 25vh;
 }
@@ -50,16 +41,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   h3 {
     font-size: 150%;
     font-weight: 100;
     color: rgb(255, 255, 255);
   }
+
   h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 100;
     color: rgb(255, 255, 255);
   }
+
   .signOut {
     border: 1px solid rgba(105, 105, 105, 0.452);
     background-color: rgb(26, 26, 26);
