@@ -55,6 +55,8 @@ class MapContainer extends Component {
           onClick={this.onMarkerClick}
           audio={clip.URL}
           name={clip.name}
+          date={clip.date}
+          img={clip.img}
         />
       );
     });
@@ -66,6 +68,7 @@ class MapContainer extends Component {
         google={this.props.google}
         style={mapStyles}
         center={{ lat: this.props.lat, lng: this.props.lng }}
+        initialCenter={{lat: this.props.lat, lng: this.props.lng}}
         zoom={16}
         onClick={this.onMapClicked}
       >
@@ -77,7 +80,9 @@ class MapContainer extends Component {
         >
           <div>
             <h1>{this.state.selectedPlace.name}</h1>
+            <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
             <audio controls src={this.state.selectedPlace.audio} />
+            <img src={this.state.selectedPlace.img} />
           </div>
         </InfoWindow>
       </Map>

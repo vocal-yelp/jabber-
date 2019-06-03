@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import firebase from '../firebase/index';
+import { Link, Redirect } from 'react-router-dom';
 import axios from "axios";
-import firebase from '../firebase/index'
-import styles from './LoadUserJabs.module.scss'
+import styles from './LoadUserJabs.module.scss';
 
 const auth = firebase.auth();
 
@@ -10,7 +11,7 @@ export default class LoadUserJabs extends Component {
         super()
         
         this.state = {
-            URL: []
+            userJabs: []
         }
     }
 
@@ -18,7 +19,7 @@ export default class LoadUserJabs extends Component {
         firebase.auth().onAuthStateChanged(user => {
             axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then( res => {
             console.log(res.data)
-            this.setState({URL: res.data})
+            this.setState({userJabs: res.data})
             })
         });
       }
@@ -32,12 +33,12 @@ export default class LoadUserJabs extends Component {
     getUpdate() {
         axios.get(`/api/loadUserJabs/${auth.currentUser.uid}`).then( res => {
             console.log("hit")
-            this.setState({URL: res.data})
+            this.setState({userJabs: res.data})
         })
     }
 
     render(){
-        const clips = this.state.URL.map((clip, index) => {
+        const clips = this.state.userJabs.map((clip, index) => {
             return (
                 <div key={index}>
                 <div className={styles.user_clips} >
@@ -51,6 +52,7 @@ export default class LoadUserJabs extends Component {
         return(
             <div>
                 {clips}
+                <Link to="/JabberMainPage"><button>Jabber</button></Link>
             </div>
         )
     }

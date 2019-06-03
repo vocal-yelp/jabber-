@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import firebase from "../firebase/index";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import styles from "./../FirebaseLogin/FirebaseLogin.module.scss";
@@ -44,6 +45,7 @@ class FirebaseLogin extends Component {
     console.log(firebase.auth()); // view user info we have available to work with
     return (
       <div className={styles.div1}>
+      {auth.currentUser ? (<Redirect to="/JabberMainPage"></Redirect>) : null}
       <div className={styles.div2}>
         <div className={styles.Login}>
           {auth.currentUser ? (

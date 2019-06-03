@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import styles from './ProfilePage.module.scss';
 import LoadUserJabs from '../LoadUserJabs/LoadUserJabs';
-
-
+import styles from './ProfilePage.module.scss';
 
 class ProfilePage extends Component{
     constructor() {

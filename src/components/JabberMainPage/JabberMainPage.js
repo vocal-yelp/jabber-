@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import LoadJabs from "../LoadJabs/LoadJabs";
 import recordButton from "./../Pics/recordButton.png";
@@ -32,12 +32,11 @@ export default class JabberMainPage extends Component {
       axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`).then(res => {
         this.setState({lat: res.data.location.lat, lng: res.data.location.lng})
       })
-      console.log(this.state.lat, this.state.lng)
-  }
-
+    }
+    
   async startUpMedia(e) {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    this.mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      this.mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
     this.chunks = [];
     this.mediaRecorder.ondataavailable = e => {
       if (e.data && e.data.size > 0) {
@@ -46,40 +45,20 @@ export default class JabberMainPage extends Component {
     };
     this.startRecording();
   }
-
+  
   startRecording() {
     this.chunks = [];
     this.mediaRecorder.start(10);
     this.setState({ recording: true });
   }
-
+  
   stopRecording(e) {
     e.preventDefault();
     this.mediaRecorder.stop();
     this.setState({ recording: false });
     this.saveAudio();
   }
-
-  async saveAudio() {
-    const uid = firebase.auth().currentUser.uid;
-    const name = firebase.auth().currentUser.displayName;
-    const date = new Date().toString().substr(0, 24);
-    const blob = await new Blob(this.chunks, { type: "audio/webm" });
-    const blobURL = window.URL.createObjectURL(blob)
-    this.setState({ blob, blobURL });
-    await storage.ref("audio/").child(`${name}: ${uid}/${date}`).put(this.state.blob);
-    const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
-    folderReturn.getDownloadURL().then(res => {
-      axios.post("/api/sendUserInfo", {
-          name,
-          uid,
-          date,
-          URL: res,
-          lat: this.state.lat,
-          lng: this.state.lng
-        }).then(response => console.log(response)).catch(err => console.log(err))});
-  }
-
+  
   pause() {
     const { recordStatus } = this.state;
     if (recordStatus === "Pause") {
@@ -97,10 +76,36 @@ export default class JabberMainPage extends Component {
     }
   }
 
-  render() {
-    const { recording } = this.state;
-    return (
-      <div className="camera">
+  async saveAudio() {
+    const uid = firebase.auth().currentUser.uid;
+    const name = firebase.auth().currentUser.displayName;
+    const date = new Date().toString().substr(0, 24);
+    const img = firebase.auth().currentUser.photoURL;
+    const blob = await new Blob(this.chunks, { type: "audio/webm" });
+    const blobURL = window.URL.createObjectURL(blob)
+    this.setState({ blob, blobURL });
+    await storage.ref("audio/").child(`${name}: ${uid}/${date}`).put(this.state.blob);
+    const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
+    folderReturn.getDownloadURL().then(res => {
+      axios.post("/api/sendUserInfo", {
+        name,
+        uid,
+        date,
+        URL: res,
+        lat: this.state.lat,
+        lng: this.state.lng,
+        img
+      }).then(response => console.log(response)).catch(err => console.log(err))});
+    }
+    
+    render() {
+      console.log(this.state.lat, this.state.lng)
+      const { recording } = this.state;
+      
+      return (
+        <div className="camera">
+        <button className={styles.signOut} onClick={() => firebase.auth().signOut()}>SignOut</button>
+        <Link to="/ProfilePage"><button className={styles.userJabs}>Jabs</button></Link>
         <div className={styles.logo}>
           <h1>Jabber</h1>
           {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
@@ -111,7 +116,7 @@ export default class JabberMainPage extends Component {
             <section className={styles.button_space}>
               {!recording ? (
                 <>
-                <img onClick={e => this.startUpMedia(e)} className={styles.recordBtn} src={recordButton} />
+                <img onClick={e => this.startUpMedia(e)} className={styles.recordBtn} src="http://chittagongit.com/download/21707" />
                 </>
               ) : (
                 <>
