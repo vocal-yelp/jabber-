@@ -18,11 +18,16 @@ class MapContainer extends Component {
       markerClips: [],
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      lat: "",
+      lng: ""
     };
   }
 
   componentDidMount() {
+    Axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`).then(res => {
+        this.setState({lat: res.data.location.lat, lng: res.data.location.lng})
+  })
     Axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
@@ -67,8 +72,8 @@ class MapContainer extends Component {
       <Map
         google={this.props.google}
         style={mapStyles}
-        center={{ lat: this.props.lat, lng: this.props.lng }}
-        initialCenter={{lat: this.props.lat, lng: this.props.lng}}
+        center={{ lat: this.state.lat, lng: this.state.lng }}
+        initialCenter={{lat: this.state.lat, lng: this.state.lng}}
         zoom={16}
         onClick={this.onMapClicked}
       >

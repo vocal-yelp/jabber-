@@ -105,7 +105,6 @@ export default class JabberMainPage extends Component {
       return (
         <div className="camera">
         <button className={styles.signOut} onClick={() => firebase.auth().signOut()}>SignOut</button>
-        <Link to="/ProfilePage"><button className={styles.userJabs}>Jabs</button></Link>
         <div className={styles.logo}>
           <h1>Jabber</h1>
           {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
@@ -116,7 +115,9 @@ export default class JabberMainPage extends Component {
             <section className={styles.button_space}>
               {!recording ? (
                 <>
+                <div className={styles.mic_button}>
                 <img onClick={e => this.startUpMedia(e)} className={styles.recordBtn} src="http://chittagongit.com/download/21707" />
+                </div>
                 </>
               ) : (
                 <>
@@ -135,10 +136,7 @@ export default class JabberMainPage extends Component {
           )}
         </div>
         {recording ? <h3>Recording...</h3> : null}
-        <MapContainer lat={this.state.lat} lng={this.state.lng} />
       </div>
     );
   }
 }
-
-{/* <LoadJabs /> */}
