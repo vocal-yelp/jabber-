@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import firebase from "../firebase/index";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import styles from "./../FirebaseLogin/FirebaseLogin.module.scss";
@@ -42,21 +43,44 @@ class FirebaseLogin extends Component {
   render() {
     console.log(firebase.auth()); // view user info we have available to work with
     return (
-      <div>
-        <h1>Firebase Login Page</h1>
-        {this.state.isSignedIn ? (
-          <span>
-            <div>Signed In!</div>
-            <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-            <h3>Welcome {firebase.auth().currentUser.displayName}</h3>
-            <img alt="profile" src={firebase.auth().currentUser.photoURL} />
-          </span>
-        ) : (
-          <StyledFirebaseAuth
-            uiConfig={this.uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
-        )}
+      <div className={styles.div1}>
+        {auth.currentUser ? <Redirect to="/JabberMainPage" /> : null}
+        <div className={styles.div2}>
+          <div className={styles.Login}>
+            {auth.currentUser ? (
+              <>
+                <img className={styles.Icon2} src={Icon2} />
+                <img
+                  className={styles.profilePic}
+                  alt="profile picture"
+                  src={firebase.auth().currentUser.photoURL}
+                />
+              </>
+            ) : (
+              <>
+                <h1>- LOGIN -</h1>
+                <img className={styles.Icon} src={Icon} />
+              </>
+            )}
+            {this.state.isSignedIn ? (
+              <span>
+                <h3>Welcome,</h3>
+                <h2>{firebase.auth().currentUser.displayName}</h2>
+                <button
+                  className={styles.signOut}
+                  onClick={() => firebase.auth().signOut()}
+                >
+                  Sign Out
+                </button>
+              </span>
+            ) : (
+              <StyledFirebaseAuth
+                uiConfig={this.uiConfig}
+                firebaseAuth={firebase.auth()}
+              />
+            )}
+          </div>
+        </div>
       </div>
     );
   }

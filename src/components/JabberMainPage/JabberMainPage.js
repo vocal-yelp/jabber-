@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import LoadJabs from "../LoadJabs/LoadJabs";
 import recordButton from "./../Pics/recordButton.png";
@@ -29,17 +29,15 @@ export default class JabberMainPage extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
-      )
-      .then(res => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
         this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
         });
-      });
-    console.log(this.state.lat, this.state.lng);
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   async startUpMedia() {
@@ -122,6 +120,7 @@ export default class JabberMainPage extends Component {
     return (
       <div>
         <div className="camera">
+          {!auth.currentUser ? <Redirect to="/" /> : null}
           <div className={styles.logo}>
             <h1>Jabber</h1>
             {auth.currentUser ? <h3>{auth.currentUser.displayName}</h3> : null}
@@ -158,9 +157,6 @@ export default class JabberMainPage extends Component {
           </div>
           {recording ? <h3>Recording...</h3> : null}
           {/* <LoadJabs /> */}
-          <br />
-          <br />
-          <MapContainer lat={this.state.lat} lng={this.state.lng} />
         </div>
       </div>
     );

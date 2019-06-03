@@ -18,15 +18,29 @@ class MapContainer extends Component {
       markerClips: [],
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      lat: "",
+      lng: ""
     };
   }
 
   componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: true });
+    });
     Axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -67,7 +81,7 @@ class MapContainer extends Component {
       <Map
         google={this.props.google}
         style={mapStyles}
-        center={{ lat: this.props.lat, lng: this.props.lng }}
+        center={{ lat: this.state.lat, lng: this.state.lng }}
         zoom={16}
         onClick={this.onMapClicked}
       >
