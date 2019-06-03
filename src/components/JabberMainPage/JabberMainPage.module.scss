@@ -13,7 +13,7 @@ body {
   margin: 10px 0px 5px 0px;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
+  // border: 2px solid black;
 
   h1 {
     color: $JabberBlue;
@@ -26,12 +26,12 @@ body {
   img {
     height: 40%;
     width: 15%;
-    border: 2px solid black;
+    // border: 2px solid black;
   }
 }
 
 .map_box {
-  border: 2px solid black;
+  // border: 2px solid black;
   height: 35vh;
   margin-bottom: 20px;
 }
@@ -39,7 +39,7 @@ body {
 .recorder_area {
   @include flex-center;
   height: 30vh;
-  border: 2px solid black;
+  // border: 2px solid black;
 
   audio {
     // background-color: red;
@@ -82,6 +82,7 @@ body {
 }
 
 @media (max-width: 800px) {
+
   .logo {
     display: flex;
     flex-direction: column;

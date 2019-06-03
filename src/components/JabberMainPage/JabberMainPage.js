@@ -28,21 +28,14 @@ export default class JabberMainPage extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({user: true})
-      console.log("user", user);
-    });
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
-        this.setState({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        });
-        console.log(this.state.lat, this.state.lng);
-      }.bind(this)
-    );
+      this.setState({user: true})});
+      axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`).then(res => {
+        this.setState({lat: res.data.location.lat, lng: res.data.location.lng})
+      })
+      console.log(this.state.lat, this.state.lng)
   }
 
-  async startUpMedia() {
+  async startUpMedia(e) {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     this.mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
     this.chunks = [];
@@ -71,29 +64,20 @@ export default class JabberMainPage extends Component {
     const uid = firebase.auth().currentUser.uid;
     const name = firebase.auth().currentUser.displayName;
     const date = new Date().toString().substr(0, 24);
-    console.log(date);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
     const blobURL = window.URL.createObjectURL(blob)
-    console.log(blob);
     this.setState({ blob, blobURL });
-    await storage
-      .ref("audio/")
-      .child(`${name}: ${uid}/${date}`)
-      .put(this.state.blob);
-
+    await storage.ref("audio/").child(`${name}: ${uid}/${date}`).put(this.state.blob);
     const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
-
     folderReturn.getDownloadURL().then(res => {
-      axios
-        .post("/api/sendUserInfo", {
+      axios.post("/api/sendUserInfo", {
           name,
           uid,
           date,
-          URL: res
-        })
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
-    });
+          URL: res,
+          lat: this.state.lat,
+          lng: this.state.lng
+        }).then(response => console.log(response)).catch(err => console.log(err))});
   }
 
   pause() {
@@ -112,6 +96,7 @@ export default class JabberMainPage extends Component {
       this.mediaRecorder.pause();
     }
   }
+
   render() {
     const { recording } = this.state;
     return (
@@ -119,9 +104,6 @@ export default class JabberMainPage extends Component {
         <div className={styles.logo}>
           <h1>Jabber</h1>
           {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
-        </div>
-        <div className={styles.map_box}>
-          <MapContainer lat={this.state.lat} lng={this.state.lng} />
         </div>
         <div className={styles.recorder_area}>
           <audio controls src={this.state.blobURL}/>
@@ -148,8 +130,10 @@ export default class JabberMainPage extends Component {
           )}
         </div>
         {recording ? <h3>Recording...</h3> : null}
-        <LoadJabs />
+        <MapContainer lat={this.state.lat} lng={this.state.lng} />
       </div>
     );
   }
 }
+
+{/* <LoadJabs /> */}

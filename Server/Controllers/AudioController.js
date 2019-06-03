@@ -16,14 +16,14 @@ firebase.initializeApp({
 
 module.exports = {
   sendUserInfo: (req, res) => {
-    const { name, uid, date, URL } = req.body;
+    const { name, uid, date, URL, lat, lng } = req.body;
     firebase
       .firestore()
       .collection(`user/`)
       .doc(`${uid}`)
       .collection(`clips/`)
       .doc(`${date}`)
-      .set({ name, uid, date, URL })
+      .set({ name, uid, date, URL, lat, lng })
       .then(res => {
         console.log("All done.");
       });

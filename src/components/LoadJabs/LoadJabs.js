@@ -27,6 +27,8 @@ export default class LoadJabs extends Component {
                 <h3>{clip.name}</h3>
                 <audio controls src={clip.URL}/>
                 <h6>{clip.date}</h6>
+                <h6>{clip.lat}</h6>
+                <h6>{clip.lng}</h6>
                 </div>
                 )
         })

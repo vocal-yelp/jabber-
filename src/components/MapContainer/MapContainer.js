@@ -1,28 +1,88 @@
-import React from "react";
-import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import React, { Component } from "react";
+import firebase from "../firebase/index";
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
+import jabberPin from "../Pics/jabber-Icon.png";
+import Axios from "axios";
 
 const mapStyles = {
   width: "100%",
-  height: "35vh"
+  height: "60vh"
 };
 
-function MapContainer(props) {
-  return (
-    <div id={styles.map}>
-      <Map
-        google={props.google}
-        style={mapStyles}
-        center={{ lat: props.lat, lng: props.lng }}
-        zoom={16}
-      >
+class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      markerClips: [],
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {}
+    };
+  }
+
+  componentDidMount() {
+    Axios.get("/api/loadJabs").then(res => {
+      console.log(res.data);
+      this.setState({ markerClips: res.data });
+    });
+  }
+
+  onMarkerClick = (props, marker, e) =>
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    });
+
+  onMapClicked = props => {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null
+      });
+    }
+  };
+
+  displayMarkers = () => {
+    return this.state.markerClips.map((clip, index) => {
+      return (
         <Marker
-          position={{ lat: props.lat, lng: props.lng }}
-          onClick={() => console.log("You clicked me!")}
+          key={index}
+          id={index}
+          position={{ lat: clip.lat, lng: clip.lng }}
+          onClick={this.onMarkerClick}
+          audio={clip.URL}
+          name={clip.name}
         />
+      );
+    });
+  };
+
+  render() {
+    return (
+      <Map
+        google={this.props.google}
+        style={mapStyles}
+        center={{ lat: this.props.lat, lng: this.props.lng }}
+        zoom={16}
+        onClick={this.onMapClicked}
+      >
+        {this.displayMarkers()}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}
+          // onOpen={this.windowHasOpened}
+        >
+          <div>
+            <h1>{this.state.selectedPlace.name}</h1>
+            <audio controls src={this.state.selectedPlace.audio} />
+          </div>
+        </InfoWindow>
       </Map>
-    </div>
-  );
+    );
+  }
 }
 
 export default GoogleApiWrapper({
