@@ -16,14 +16,14 @@ firebase.initializeApp({
 
 module.exports = {
   sendUserInfo: (req, res) => {
-    const { name, uid, date, URL } = req.body;
+    const { name, uid, date, URL, lat, lng, img } = req.body;
     firebase
       .firestore()
       .collection(`user/`)
       .doc(`${uid}`)
       .collection(`clips/`)
       .doc(`${date}`)
-      .set({ name, uid, date, URL })
+      .set({ name, uid, date, URL, lat, lng, img })
       .then(res => {
         console.log("All done.");
       });
@@ -66,14 +66,16 @@ module.exports = {
 
   deleteJab: (req, response) => {
     console.log("hit");
-    console.log(req.params.id);
+    const { uid, date } = req.body;
     firebase
       .firestore()
-      .collection("audio/")
-      .doc(req.params.id)
+      .collection("user/")
+      .doc(uid)
+      .collection("clips")
+      .doc(date)
       .delete()
       .then(res => {
-        console.log("yes");
+        console.log(res, "yes");
       })
       .catch(err => console.log("no"));
   }
