@@ -2,7 +2,7 @@
 // Has access to flex-center mixin
 
 body {
-  background-color: white;
+  background-color: rgb(241, 242, 246);
 }
 
 .logo {
@@ -15,6 +15,10 @@ body {
   align-items: center;
   
   h1 {
+    color: $JabberBlue;
+    font-family: "Pacifico", cursive;
+  }
+  h1:hover {
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
   }
@@ -63,6 +67,7 @@ body {
     
     .mic_button:hover {
       box-shadow: none;
+      background-color: rgb(255, 255, 255);
     }
   }
   

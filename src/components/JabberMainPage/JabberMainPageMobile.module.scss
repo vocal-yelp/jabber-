@@ -28,63 +28,38 @@
     height: 30vh;
     // @include border;
 
-    
     audio {
       margin-bottom: 10px;
       width: 60%;
     }
-    
+
     .button_space {
       margin-top: 10%;
       width: 100%;
       display: flex;
       justify-content: space-around;
-    
+      
       .mic_button {
-        height: 5vh;
-        width: 10%;
+        height: 17vh;
+        width: 20%;
         border-radius: 50%;
         background-color: rgb(255, 255, 255);
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 2px 2px 5px black;
-  
+        box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+        
         
         .recordBtn {
-          height: 4vh;
+          height: 10vh;
           width: 80%;
         }
       }
-      
-      .mic_button:hover {
-        box-shadow: none;
-      }
-  }
-
- 
-    height: 17vh;
-      width: 20%;
-      border-radius: 50%;
-      background-color: rgb(255, 255, 255);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 2px 2px 5px black;
-
+    }
+    
     .mic_button:hover {
       box-shadow: none;
-    }
-      
-    .recordBtn {
-      height: 10vh;
-      width: 80%;
-    }
-    }
-
-    #invisible_button {
-      background-color: rgba(0, 0, 0, 0);
-      border: none;
+      background-color: rgb(151, 58, 58);
     }
 
     button {
@@ -110,4 +85,5 @@
       height: 100%;
     }
   }
+}
 

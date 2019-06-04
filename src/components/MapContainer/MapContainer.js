@@ -81,6 +81,7 @@ class MapContainer extends Component {
       <div>
       <AppNavigation/>
       <Map
+        className={styles.map}
         google={this.props.google}
         style={mapStyles}
         center={{ lat: this.state.lat, lng: this.state.lng }}
@@ -94,11 +95,11 @@ class MapContainer extends Component {
           visible={this.state.showingInfoWindow}
           // onOpen={this.windowHasOpened}
         >
-          <div>
+          <div className={styles.info_window}>
+            <img src={this.state.selectedPlace.img} />
             <h1>{this.state.selectedPlace.name}</h1>
             <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
             <audio controls src={this.state.selectedPlace.audio} />
-            <img src={this.state.selectedPlace.img} />
           </div>
         </InfoWindow>
       </Map>
