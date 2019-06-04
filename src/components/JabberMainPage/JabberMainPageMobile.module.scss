@@ -38,7 +38,7 @@
       width: 100%;
       display: flex;
       justify-content: space-around;
-      
+
       .mic_button {
         height: 17vh;
         width: 20%;
@@ -48,15 +48,14 @@
         justify-content: center;
         align-items: center;
         box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
-        
-        
+
         .recordBtn {
           height: 10vh;
           width: 80%;
         }
       }
     }
-    
+
     .mic_button:hover {
       box-shadow: none;
       background-color: rgb(151, 58, 58);
@@ -71,6 +70,7 @@
       color: white;
     }
   }
+
   .map_box {
     height: 30vh;
     width: 90%;
@@ -86,4 +86,3 @@
     }
   }
 }
-

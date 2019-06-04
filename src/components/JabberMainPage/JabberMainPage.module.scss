@@ -18,8 +18,8 @@ body {
   // margin: 10px 0px 5px 0px;
   justify-content: center;
   align-items: center;
-  border: 2px solid black;
-  
+  // border: 2px solid black;
+
   h1 {
     font-size: 2.5em;
     color: $JabberBlue;
@@ -29,11 +29,11 @@ body {
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
   }
-  
+
   h3 {
     color: $JabberBlue;
   }
-  
+
   img {
     height: 40%;
     width: 15%;
@@ -43,21 +43,21 @@ body {
 .recorder_area {
   @include flex-center;
   height: 30vh;
-  border: 2px solid black;
-  
+  // border: 2px solid black;
+
   audio {
-    height: 10vh;
-    border: 2px solid black;
+    height: 12vh;
+    // border: 2px solid black;
   }
-  
+
   .button_space {
-    margin-top: 10%;
+    margin-top: 1em;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    
+
     .mic_button {
-      border: 2px solid black;
+      // border: 2px solid black;
       height: 10em;
       width: 10em;
       border-radius: 50%;
@@ -66,20 +66,19 @@ body {
       justify-content: center;
       align-items: center;
       box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
-      
-      
+
       .recordBtn {
         height: 5em;
         width: 5em;
       }
     }
-    
+
     .mic_button:hover {
       box-shadow: none;
       background-color: rgb(255, 255, 255);
     }
   }
-  
+
   button {
     width: 15%;
     height: 30px;
@@ -88,18 +87,17 @@ body {
     border-color: rgb(12, 12, 27);
     color: white;
   }
-  
+
   .map_box {
     height: 20vh;
     width: 90%;
     margin-left: 5%;
     @include border;
-    
+
     h1 {
       color: red;
     }
   }
-
 }
 
 .main_page_bottom {
@@ -114,6 +112,5 @@ body {
     color: white;
   }
 }
-
 
 @import "./JabberMainPageMobile.module.scss";

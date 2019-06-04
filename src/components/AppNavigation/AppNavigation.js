@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import firebase from '../firebase/index'
+import firebase from "../firebase/index";
 import styles from "./AppNavigation.module.scss";
 
 export default function AppNavigation() {
