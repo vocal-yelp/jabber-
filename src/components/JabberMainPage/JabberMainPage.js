@@ -103,9 +103,10 @@ export default class JabberMainPage extends Component {
         <div className="camera">
         <AppNavigation/>
         {!auth.currentUser ? <Redirect to="/"/> : null}
+        <section className={styles.main_page_top}>
         <div className={styles.logo}>
           <h1>Jabber</h1>
-          {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null}
+          {/* {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null} */}
         </div>
         <div className={styles.recorder_area}>
           <audio controls src={this.state.blobURL}/>
@@ -134,6 +135,10 @@ export default class JabberMainPage extends Component {
           )}
         </div>
         {recording ? <h3>Recording...</h3> : null}
+        </section>
+        <section className={styles.main_page_bottom}>
+          <h1>hello, this is the bottom section of Jabber Main Page</h1>
+        </section>
       </div>
     );
   }
