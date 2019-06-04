@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import firebase from "../firebase/index";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import styles from "./../FirebaseLogin/FirebaseLogin.module.scss";
-import Icon from "../Pics/jabber-Icon.png";
+import Icon from "../Pics/logo.png";
 import Icon2 from "../Pics/jabber-app.png";
 
 // firebase.initializeApp({
@@ -21,6 +21,7 @@ class FirebaseLogin extends Component {
       isSignedIn: false
     };
   }
+
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [

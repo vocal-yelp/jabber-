@@ -2,7 +2,12 @@
 // Has access to flex-center mixin
 
 body {
-  background-color: $JabberYellow;
+  background-color: rgb(241, 242, 246);
+}
+
+.main_page_top {
+  height: 80vh;
+  width: 100%;
 }
 
 .logo {
@@ -10,12 +15,17 @@ body {
   flex-direction: column;
   width: 100%;
   height: 20vh;
-  margin: 10px 0px 5px 0px;
+  // margin: 10px 0px 5px 0px;
   justify-content: center;
   align-items: center;
   // border: 2px solid black;
 
   h1 {
+    font-size: 2.5em;
+    color: $JabberBlue;
+    font-family: "Pacifico", cursive;
+  }
+  h1:hover {
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
   }
@@ -23,10 +33,13 @@ body {
     color: $JabberBlue;
   }
 
+  h3 {
+    color: $JabberBlue;
+  }
+
   img {
     height: 40%;
     width: 15%;
-    // border: 2px solid black;
   }
 }
 
@@ -36,20 +49,36 @@ body {
   // border: 2px solid black;
 
   audio {
-    // background-color: red;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    height: 12vh;
+    // border: 2px solid black;
   }
 
   .button_space {
-    margin-top: 10%;
+    margin-top: 1em;
     width: 100%;
     display: flex;
     justify-content: space-around;
 
-    img {
-      height: 30px;
-      width: 50px;
+    .mic_button {
+      // border: 2px solid black;
+      height: 10em;
+      width: 10em;
+      border-radius: 50%;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+
+      .recordBtn {
+        height: 5em;
+        width: 5em;
+      }
+    }
+
+    .mic_button:hover {
+      box-shadow: none;
+      background-color: rgb(255, 255, 255);
     }
   }
 
@@ -74,74 +103,17 @@ body {
   }
 }
 
-@media (max-width: 800px) {
-  .logo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 25vh;
-    margin: 10px 0px 25px 0px;
-    justify-content: center;
-    align-items: center;
-    // border: 2px solid black;
+.main_page_bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 100%;
+  background-color: rgb(18, 18, 20);
 
-    // img {
-    // }
-
-    .logo2 {
-      margin-top: 20%;
-      height: 50%;
-      width: 50%;
-    }
-  }
-  .greeting {
-    margin-bottom: 2%;
-  }
-  .recorder_area {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-    // @include border;
-
-    audio {
-      margin-bottom: 10px;
-      width: 60%;
-    }
-
-    .button_space {
-      margin-top: 10%;
-      width: 100%;
-      height: 25vh;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-direction: row;
-      // border: 2px solid black;
-
-      #invisible_button {
-        background-color: rgba(0, 0, 0, 0);
-        border: none;
-      }
-
-      .recordBtn {
-        height: 15vh;
-        width: 30%;
-        margin: -25%;
-        display: flex;
-      }
-    }
-    div {
-      h2 {
-        color: $JabberBlue;
-      }
-      a {
-        text-decoration: none;
-      }
-      h3 {
-        color: rgb(30, 27, 44);
-      }
-    }
+  h1 {
+    color: white;
   }
 }
+
+@import "./JabberMainPageMobile.module.scss";

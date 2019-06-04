@@ -7,10 +7,7 @@ import AppNavigation from "./components/AppNavigation/AppNavigation";
 function App() {
   return (
     <HashRouter>
-      <div className="App">
-        <AppNavigation />
-        {Routes}
-      </div>
+      <div className="App">{Routes}</div>
     </HashRouter>
   );
 }
