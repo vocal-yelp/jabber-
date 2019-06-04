@@ -2,16 +2,12 @@
 // Has access to flex-center mixin
 
 body {
-<<<<<<< HEAD
-  background-color: white;
-=======
   background-color: rgb(241, 242, 246);
 }
 
 .main_page_top {
   height: 80vh;
   width: 100%;
->>>>>>> master
 }
 
 .logo {
@@ -52,13 +48,8 @@ body {
   height: 30vh;
 
   audio {
-<<<<<<< HEAD
-    margin-bottom: 20px;
-    margin-top: 20px;
-=======
     height: 12vh;
     // border: 2px solid black;
->>>>>>> master
   }
 
   .button_space {
@@ -68,14 +59,9 @@ body {
     justify-content: space-around;
 
     .mic_button {
-<<<<<<< HEAD
-      height: 17vh;
-      width: 20%;
-=======
       // border: 2px solid black;
       height: 10em;
       width: 10em;
->>>>>>> master
       border-radius: 50%;
       background-color: rgb(255, 255, 255);
       display: flex;
@@ -84,22 +70,14 @@ body {
       box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
 
       .recordBtn {
-<<<<<<< HEAD
-        height: 10vh;
-        width: 80%;
-=======
         height: 5em;
         width: 5em;
->>>>>>> master
       }
     }
 
     .mic_button:hover {
       box-shadow: none;
-<<<<<<< HEAD
-=======
       background-color: rgb(255, 255, 255);
->>>>>>> master
     }
   }
 
@@ -124,8 +102,6 @@ body {
   }
 }
 
-<<<<<<< HEAD
-=======
 .main_page_bottom {
   display: flex;
   justify-content: center;
@@ -139,5 +115,4 @@ body {
   }
 }
 
->>>>>>> master
 @import "./JabberMainPageMobile.module.scss";

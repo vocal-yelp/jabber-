@@ -4,7 +4,6 @@ import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import axios from "axios";
-import AppNavigation from "../AppNavigation/AppNavigation";
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -130,17 +129,10 @@ export default class JabberMainPage extends Component {
     console.log(this.state.lat, this.state.lng);
     const { recording } = this.state;
     return (
-<<<<<<< HEAD
-      <div>
-        <AppNavigation />
-        <div className="camera">
-          {!auth.currentUser ? <Redirect to="/" /> : null}
-=======
       <div className="camera">
         <AppNavigation />
         {!auth.currentUser ? <Redirect to="/" /> : null}
         <section className={styles.main_page_top}>
->>>>>>> master
           <div className={styles.logo}>
             <h1>Jabber</h1>
             {/* {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null} */}

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
-<<<<<<< HEAD
-=======
 import styles from "./ProfilePage.module.scss";
->>>>>>> master
 import AppNavigation from "../AppNavigation/AppNavigation";
 
 class ProfilePage extends Component {
@@ -17,12 +14,6 @@ class ProfilePage extends Component {
     return (
       <div>
         <AppNavigation />
-<<<<<<< HEAD
-        <div className={styles.delete_icon}>
-          <h1>Delete Your Jabs</h1>
-        </div>
-        <LoadUserJabs />
-=======
         <section className={styles.profile_page_top}>
           <div className={styles.delete_icon}>
             <h1>Delete Your Jabs</h1>
@@ -36,7 +27,6 @@ class ProfilePage extends Component {
         <section className={styles.profile_page_bottom}>
           <h1>hello, this is the bottom section of Jabber Main Page</h1>
         </section>
->>>>>>> master
       </div>
     );
   }

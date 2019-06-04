@@ -6,7 +6,6 @@
 //   })
 // }
 
-<<<<<<< HEAD
 
 // componentDidMount() {
   //   const folderReturn = storage.ref(
@@ -54,7 +53,6 @@ async saveAudio() {
       }
     );
   }
-=======
 // .set(
 //   {
 //     name: req.body.name
@@ -80,4 +78,21 @@ uploadBlob.on("state_changed", () => null, error => { console.log(error) },
   );
 
   // const blobURL = window.URL.createObjectURL(blob);
->>>>>>> master
+
+
+componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: true });
+    });
+    axios
+      .post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
+      )
+      .then(res => {
+        this.setState({
+          lat: res.data.location.lat,
+          lng: res.data.location.lng
+        });
+      });
+    console.log(this.state.lat, this.state.lng);
+  }

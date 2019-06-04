@@ -1,6 +1,4 @@
 const firebase = require("firebase");
-// const storage = require('firebase/storage')
-// const firebase = require('../../src/components/firebase/index')
 
 firebase.initializeApp({
   apiKey: process.env.API_KEY,
@@ -11,8 +9,6 @@ firebase.initializeApp({
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID
 });
-
-// const firestorage = firebase.storage();
 
 module.exports = {
   sendUserInfo: (req, res) => {
@@ -79,4 +75,8 @@ module.exports = {
       })
       .catch(err => console.log("no"));
   }
+
+  // deleteOldJabs: () => {
+
+  // }
 };
