@@ -2,7 +2,7 @@
 // Has access to flex-center mixin
 
 body {
-  background-color: $JabberYellow;
+  background-color: white;
 }
 
 .logo {
@@ -13,12 +13,12 @@ body {
   margin: 10px 0px 5px 0px;
   justify-content: center;
   align-items: center;
-  // border: 2px solid black;
 
   h1 {
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
   }
+
   h3 {
     color: $JabberBlue;
   }
@@ -26,17 +26,14 @@ body {
   img {
     height: 40%;
     width: 15%;
-    // border: 2px solid black;
   }
 }
 
 .recorder_area {
   @include flex-center;
   height: 30vh;
-  // border: 2px solid black;
 
   audio {
-    // background-color: red;
     margin-bottom: 20px;
     margin-top: 20px;
   }
@@ -47,9 +44,24 @@ body {
     display: flex;
     justify-content: space-around;
 
-    img {
-      height: 30px;
-      width: 50px;
+    .mic_button {
+      height: 17vh;
+      width: 20%;
+      border-radius: 50%;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+
+      .recordBtn {
+        height: 10vh;
+        width: 80%;
+      }
+    }
+
+    .mic_button:hover {
+      box-shadow: none;
     }
   }
 
@@ -74,74 +86,4 @@ body {
   }
 }
 
-@media (max-width: 800px) {
-  .logo {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 25vh;
-    margin: 10px 0px 25px 0px;
-    justify-content: center;
-    align-items: center;
-    // border: 2px solid black;
-
-    // img {
-    // }
-
-    .logo2 {
-      margin-top: 20%;
-      height: 50%;
-      width: 50%;
-    }
-  }
-  .greeting {
-    margin-bottom: 2%;
-  }
-  .recorder_area {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 30vh;
-    // @include border;
-
-    audio {
-      margin-bottom: 10px;
-      width: 60%;
-    }
-
-    .button_space {
-      margin-top: 10%;
-      width: 100%;
-      height: 25vh;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-direction: row;
-      // border: 2px solid black;
-
-      #invisible_button {
-        background-color: rgba(0, 0, 0, 0);
-        border: none;
-      }
-
-      .recordBtn {
-        height: 15vh;
-        width: 30%;
-        margin: -25%;
-        display: flex;
-      }
-    }
-    div {
-      h2 {
-        color: $JabberBlue;
-      }
-      a {
-        text-decoration: none;
-      }
-      h3 {
-        color: rgb(30, 27, 44);
-      }
-    }
-  }
-}
+@import "./JabberMainPageMobile.module.scss";

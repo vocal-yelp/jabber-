@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
+import AppNavigation from "../AppNavigation/AppNavigation";
 import axios from "axios";
 import LoadJabs from "../LoadJabs/LoadJabs";
 import recordButton from "./../Pics/recordButton.png";
@@ -119,6 +120,7 @@ export default class JabberMainPage extends Component {
     const { recording } = this.state;
     return (
       <div>
+        <AppNavigation />
         <div className="camera">
           {!auth.currentUser ? <Redirect to="/" /> : null}
           <div className={styles.logo}>
@@ -131,11 +133,13 @@ export default class JabberMainPage extends Component {
               <section className={styles.button_space}>
                 {!recording ? (
                   <>
-                    <img
-                      onClick={e => this.startUpMedia(e)}
-                      className={styles.recordBtn}
-                      src={recordButton}
-                    />
+                    <div className={styles.mic_button}>
+                      <img
+                        onClick={e => this.startUpMedia(e)}
+                        className={styles.recordBtn}
+                        src="http://chittagongit.com/download/21707"
+                      />
+                    </div>
                   </>
                 ) : (
                   <>

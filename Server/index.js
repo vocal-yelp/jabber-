@@ -6,6 +6,8 @@ app.use(express.json());
 
 const { SERVER_PORT } = process.env;
 
+app.use(express.static(`${__dirname}/../build`));
+
 const {
   sendUserInfo,
   loadJabs,

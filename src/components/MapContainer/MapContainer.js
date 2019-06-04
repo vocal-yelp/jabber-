@@ -3,6 +3,7 @@ import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
 import jabberPin from "../Pics/jabber-Icon.png";
+import AppNavigation from "../AppNavigation/AppNavigation";
 import Axios from "axios";
 
 const mapStyles = {
@@ -78,27 +79,30 @@ class MapContainer extends Component {
 
   render() {
     return (
-      <Map
-        google={this.props.google}
-        style={mapStyles}
-        center={{ lat: this.state.lat, lng: this.state.lng }}
-        zoom={16}
-        onClick={this.onMapClicked}
-      >
-        {this.displayMarkers()}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          // onOpen={this.windowHasOpened}
+      <div>
+        <AppNavigation />
+        <Map
+          google={this.props.google}
+          style={mapStyles}
+          center={{ lat: this.state.lat, lng: this.state.lng }}
+          zoom={16}
+          onClick={this.onMapClicked}
         >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
-            <audio controls src={this.state.selectedPlace.audio} />
-            <img src={this.state.selectedPlace.img} />
-          </div>
-        </InfoWindow>
-      </Map>
+          {this.displayMarkers()}
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            // onOpen={this.windowHasOpened}
+          >
+            <div className={styles.info_window}>
+              <img src={this.state.selectedPlace.img} />
+              <h1>{this.state.selectedPlace.name}</h1>
+              <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
+              <audio controls src={this.state.selectedPlace.audio} />
+            </div>
+          </InfoWindow>
+        </Map>
+      </div>
     );
   }
 }
