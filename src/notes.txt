@@ -6,6 +6,55 @@
 //   })
 // }
 
+<<<<<<< HEAD
+
+// componentDidMount() {
+  //   const folderReturn = storage.ref(
+  //     "audio/Adam Mckenzie: fzQyFSyWg7Nh7VokTioTp1gBO502/Wed May 29 2019 16:24:46 GMT-0500 (Central Daylight Time)"
+  //   );
+  //   console.log("folder log", folderReturn);
+  //   const child = folderReturn.child(
+  //     "Wed May 29 2019 16:24:46 GMT-0500 (Central Daylight Time)"
+  //   );
+  //   console.log(child);
+  //   folderReturn.getDownloadURL().then(res => {
+  //     console.log(res);
+  //   });
+  // }
+
+
+async saveAudio() {
+    const uid = firebase.auth().currentUser.uid;
+    const name = firebase.auth().currentUser.displayName;
+    const date = new Date();
+    const blob = await new Blob(this.chunks, { type: "audio/webm" });
+    console.log(blob);
+    const blobURL = window.URL.createObjectURL(blob);
+    this.setState({ blob, blobURL });
+    // storage.ref("audio/").put(this.state.blob);
+    const uploadBlob = storage
+      .ref("audio/")
+      .child(`${name}: ${uid}/${date}`)
+      .put(this.state.blob);
+    uploadBlob.on(
+      "state_changed",
+      () => null,
+      error => {
+        console.log(error);
+      },
+      () => {
+        axios
+          .post("/api/sendBlob", {
+            name,
+            uid
+          })
+          .then(response => {
+            console.log(response);
+          });
+      }
+    );
+  }
+=======
 // .set(
 //   {
 //     name: req.body.name
@@ -31,3 +80,4 @@ uploadBlob.on("state_changed", () => null, error => { console.log(error) },
   );
 
   // const blobURL = window.URL.createObjectURL(blob);
+>>>>>>> master

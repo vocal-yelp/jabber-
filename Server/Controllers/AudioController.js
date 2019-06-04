@@ -67,7 +67,6 @@ module.exports = {
   deleteJab: (req, response) => {
     console.log("hit");
     const { uid, date } = req.body;
-    console.log(req.body);
     firebase
       .firestore()
       .collection("user/")

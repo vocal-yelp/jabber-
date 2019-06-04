@@ -23,6 +23,20 @@ export default class JabberMainPage extends Component {
       lng: ""
     };
   }
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: true });
+    });
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
+  }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
@@ -85,8 +99,8 @@ export default class JabberMainPage extends Component {
   async saveAudio() {
     const uid = firebase.auth().currentUser.uid;
     const name = firebase.auth().currentUser.displayName;
-    const date = new Date().toString().substr(0, 24);
     const img = firebase.auth().currentUser.photoURL;
+    const date = new Date().toString().substr(0, 24);
     const blob = await new Blob(this.chunks, { type: "audio/webm" });
     const blobURL = window.URL.createObjectURL(blob);
     this.setState({ blob, blobURL });
