@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import MapContainer from "../MapContainer/MapContainer";
-import styles from "./ProfilePage.module.scss";
 import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
+<<<<<<< HEAD
+=======
+import styles from "./ProfilePage.module.scss";
+>>>>>>> master
 import AppNavigation from "../AppNavigation/AppNavigation";
 
 class ProfilePage extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {};
   }
@@ -15,10 +17,26 @@ class ProfilePage extends Component {
     return (
       <div>
         <AppNavigation />
+<<<<<<< HEAD
         <div className={styles.delete_icon}>
           <h1>Delete Your Jabs</h1>
         </div>
         <LoadUserJabs />
+=======
+        <section className={styles.profile_page_top}>
+          <div className={styles.delete_icon}>
+            <h1>Delete Your Jabs</h1>
+            <img
+              src="https://images.vexels.com/media/users/3/158148/isolated/preview/9043e523c85dcaeb815975c32cffd879-sad-open-mouth-icon-by-vexels.png"
+              alt=""
+            />
+          </div>
+          <LoadUserJabs />
+        </section>
+        <section className={styles.profile_page_bottom}>
+          <h1>hello, this is the bottom section of Jabber Main Page</h1>
+        </section>
+>>>>>>> master
       </div>
     );
   }

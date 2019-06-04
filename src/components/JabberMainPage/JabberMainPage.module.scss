@@ -2,7 +2,16 @@
 // Has access to flex-center mixin
 
 body {
+<<<<<<< HEAD
   background-color: white;
+=======
+  background-color: rgb(241, 242, 246);
+}
+
+.main_page_top {
+  height: 80vh;
+  width: 100%;
+>>>>>>> master
 }
 
 .logo {
@@ -10,13 +19,22 @@ body {
   flex-direction: column;
   width: 100%;
   height: 20vh;
-  margin: 10px 0px 5px 0px;
+  // margin: 10px 0px 5px 0px;
   justify-content: center;
   align-items: center;
 
   h1 {
+    font-size: 2.5em;
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
+  }
+  h1:hover {
+    color: $JabberBlue;
+    font-family: "Pacifico", cursive;
+  }
+
+  h3 {
+    color: $JabberBlue;
   }
 
   h3 {
@@ -34,19 +52,30 @@ body {
   height: 30vh;
 
   audio {
+<<<<<<< HEAD
     margin-bottom: 20px;
     margin-top: 20px;
+=======
+    height: 12vh;
+    // border: 2px solid black;
+>>>>>>> master
   }
 
   .button_space {
-    margin-top: 10%;
+    margin-top: 1em;
     width: 100%;
     display: flex;
     justify-content: space-around;
 
     .mic_button {
+<<<<<<< HEAD
       height: 17vh;
       width: 20%;
+=======
+      // border: 2px solid black;
+      height: 10em;
+      width: 10em;
+>>>>>>> master
       border-radius: 50%;
       background-color: rgb(255, 255, 255);
       display: flex;
@@ -55,13 +84,22 @@ body {
       box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
 
       .recordBtn {
+<<<<<<< HEAD
         height: 10vh;
         width: 80%;
+=======
+        height: 5em;
+        width: 5em;
+>>>>>>> master
       }
     }
 
     .mic_button:hover {
       box-shadow: none;
+<<<<<<< HEAD
+=======
+      background-color: rgb(255, 255, 255);
+>>>>>>> master
     }
   }
 
@@ -86,4 +124,20 @@ body {
   }
 }
 
+<<<<<<< HEAD
+=======
+.main_page_bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 100%;
+  background-color: rgb(18, 18, 20);
+
+  h1 {
+    color: white;
+  }
+}
+
+>>>>>>> master
 @import "./JabberMainPageMobile.module.scss";

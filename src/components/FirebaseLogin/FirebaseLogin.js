@@ -21,6 +21,7 @@ class FirebaseLogin extends Component {
       isSignedIn: false
     };
   }
+
   uiConfig = {
     signInFlow: "popup",
     signInOptions: [

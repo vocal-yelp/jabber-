@@ -38,11 +38,27 @@
       width: 100%;
       display: flex;
       justify-content: space-around;
+
+      .mic_button {
+        height: 17vh;
+        width: 20%;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+
+        .recordBtn {
+          height: 10vh;
+          width: 80%;
+        }
+      }
     }
 
-    #invisible_button {
-      background-color: rgba(0, 0, 0, 0);
-      border: none;
+    .mic_button:hover {
+      box-shadow: none;
+      background-color: rgb(151, 58, 58);
     }
 
     button {
@@ -54,6 +70,7 @@
       color: white;
     }
   }
+
   .map_box {
     height: 30vh;
     width: 90%;

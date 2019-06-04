@@ -87,6 +87,10 @@ class MapContainer extends Component {
       <div>
         <AppNavigation />
         <Map
+<<<<<<< HEAD
+=======
+          className={styles.map}
+>>>>>>> master
           google={this.props.google}
           style={mapStyles}
           center={{ lat: this.state.lat, lng: this.state.lng }}

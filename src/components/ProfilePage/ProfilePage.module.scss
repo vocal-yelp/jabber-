@@ -1,6 +1,11 @@
 @import "../SassMixinsandVariables.scss";
 @import "./ProfilePageMobile.module.scss";
 
+.profile_page_top {
+  height: 80vh;
+  width: 100%;
+}
+
 .delete_icon {
   width: 80%;
   margin: 20px 0px 0px 10%;
@@ -12,5 +17,18 @@
   img {
     width: 80px;
     height: 80px;
+  }
+}
+
+.profile_page_bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 100%;
+  background-color: rgb(18, 18, 20);
+
+  h1 {
+    color: white;
   }
 }
