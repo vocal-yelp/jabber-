@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
-import jabberPin from "../Pics/jabber-Icon.png";
+// import jabberPin from "../Pics/jabber-Icon.png";
 import AppNavigation from "../AppNavigation/AppNavigation";
+import icon from "../Pics/logo.png";
 import Axios from "axios";
 
 const mapStyles = {
@@ -72,6 +73,11 @@ class MapContainer extends Component {
           name={clip.name}
           img={clip.img}
           date={clip.date}
+          icon={{
+            url: icon,
+            anchor: new window.google.maps.Point(32, 32),
+            scaledSize: new window.google.maps.Size(48, 48)
+          }}
         />
       );
     });
