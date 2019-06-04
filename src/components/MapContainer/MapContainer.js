@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
-// import jabberPin from "../Pics/jabber-Icon.png";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import icon from "../Pics/logo.png";
 import Axios from "axios";
