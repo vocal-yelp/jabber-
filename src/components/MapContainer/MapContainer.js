@@ -3,7 +3,9 @@ import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
+import mouth from "../Pics/mouth.png";
 import icon from "../Pics/logo.png";
+
 import Axios from "axios";
 
 const mapStyles = {
@@ -73,7 +75,7 @@ class MapContainer extends Component {
           img={clip.img}
           date={clip.date}
           icon={{
-            url: icon,
+            url: mouth,
             anchor: new window.google.maps.Point(32, 32),
             scaledSize: new window.google.maps.Size(48, 48)
           }}
@@ -86,6 +88,10 @@ class MapContainer extends Component {
     return (
       <div>
         <AppNavigation />
+        <div className={styles.div2}>
+          <img className={styles.logo} src={icon} />
+          <h1 className={styles.title}> EXPLORE JABS </h1>
+        </div>
         <Map
           className={styles.map}
           google={this.props.google}

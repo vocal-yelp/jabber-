@@ -1,18 +1,51 @@
 @import "../SassMixinsandVariables.scss";
 
+.mainDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 4em;
+  height: 15em;
+  width: 100vw;
+
+  h6 {
+    // height: 4%;
+    // border: 1px solid rgb(0, 225, 255);
+    font-size: 3vh;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 200;
+    margin: 3%;
+  }
+
+  .div2 {
+    border-bottom: 1px solid rgba(119, 119, 119, 0.308);
+    width: 70vw;
+    margin-left: 15%;
+  }
+}
+
 .user_clips {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  width: 80%;
-  margin-left: 10%;
+  width: 100%;
+  // margin-left: 25%;
+  // border: 1px solid red;
+
+  audio {
+    width: 50vw;
+  }
 
   button {
     height: 2em;
     width: 2em;
-    background-color: $JabberBlue;
-    color: white;
+    border-radius: 100%;
+    background-color: white;
+    color: $JabberBlue;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1.5em;
     border: none;
+    margin: 1em 0em 1em 0em;
   }
 }
