@@ -40,8 +40,8 @@
       justify-content: space-around;
 
       .mic_button {
-        height: 17vh;
-        width: 20%;
+        height: 5em;
+        width: 5em;
         border-radius: 50%;
         background-color: rgb(255, 255, 255);
         display: flex;
@@ -50,8 +50,8 @@
         box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
 
         .recordBtn {
-          height: 10vh;
-          width: 80%;
+          height: 3em;
+          width: 3em;
         }
       }
     }

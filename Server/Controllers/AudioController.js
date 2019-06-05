@@ -69,6 +69,7 @@ module.exports = {
       .doc(uid)
       .collection("clips")
       .doc(date)
+
       .delete()
       .then(res => {
         console.log(res, "yes");

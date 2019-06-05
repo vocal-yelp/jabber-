@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
+import { ToastContainer, toast, Zoom } from "react-toastify";
+import css from "./toast.css";
+import "react-toastify/dist/ReactToastify.css";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import axios from "axios";
 
@@ -23,6 +26,7 @@ export default class JabberMainPage extends Component {
       lng: ""
     };
   }
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
@@ -36,22 +40,6 @@ export default class JabberMainPage extends Component {
         console.log(this.state.lat, this.state.lng);
       }.bind(this)
     );
-  }
-
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: true });
-    });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
-      )
-      .then(res => {
-        this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
-        });
-      });
   }
 
   async startUpMedia(e) {
@@ -72,11 +60,14 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: true });
   }
 
+  notify = () => toast("Check the map dude!");
+
   stopRecording(e) {
     e.preventDefault();
     this.mediaRecorder.stop();
     this.setState({ recording: false });
     this.saveAudio();
+    this.notify();
   }
 
   pause() {
@@ -131,6 +122,19 @@ export default class JabberMainPage extends Component {
     return (
       <div className="camera">
         <AppNavigation />
+        <ToastContainer
+          transition={Zoom}
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
+
         {!auth.currentUser ? <Redirect to="/" /> : null}
         <section className={styles.main_page_top}>
           <div className={styles.logo}>
@@ -172,7 +176,7 @@ export default class JabberMainPage extends Component {
           {recording ? <h3>Recording...</h3> : null}
         </section>
         <section className={styles.main_page_bottom}>
-          <h1>hello, this is the bottom section of Jabber Main Page</h1>
+          {/* <h1>hello, this is the bottom section of Jabber Main Page</h1> */}
         </section>
       </div>
     );
