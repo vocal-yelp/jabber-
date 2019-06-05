@@ -3,9 +3,8 @@ import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
-import LoadJabs from "../LoadJabs/LoadJabs";
-import recordButton from "./../Pics/recordButton.png";
-import MapContainer from "../MapContainer/MapContainer";
+import AppNavigation from "../AppNavigation/AppNavigation";
+import Icon from "../Pics/jabber-Icon-final.png";
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -19,7 +18,7 @@ export default class JabberMainPage extends Component {
       recordStatus: "Pause",
       blob: "",
       blobURL: "",
-      URL,
+      URL: "",
       user: false,
       lat: "",
       lng: ""
@@ -40,7 +39,23 @@ export default class JabberMainPage extends Component {
     );
   }
 
-  async startUpMedia() {
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user: true });
+    });
+    axios
+      .post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
+      )
+      .then(res => {
+        this.setState({
+          lat: res.data.location.lat,
+          lng: res.data.location.lng
+        });
+      });
+  }
+
+  async startUpMedia(e) {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     this.mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
     this.chunks = [];
@@ -65,39 +80,6 @@ export default class JabberMainPage extends Component {
     this.saveAudio();
   }
 
-  async saveAudio() {
-    const uid = firebase.auth().currentUser.uid;
-    const name = firebase.auth().currentUser.displayName;
-    const img = firebase.auth().currentUser.photoURL;
-    const date = new Date().toString().substr(0, 24);
-    console.log(date);
-    const blob = await new Blob(this.chunks, { type: "audio/webm" });
-    const blobURL = window.URL.createObjectURL(blob);
-    console.log(blob);
-    this.setState({ blob, blobURL });
-    await storage
-      .ref("audio/")
-      .child(`${name}: ${uid}/${date}`)
-      .put(this.state.blob);
-
-    const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
-
-    folderReturn.getDownloadURL().then(res => {
-      axios
-        .post("/api/sendUserInfo", {
-          name,
-          uid,
-          date,
-          URL: res,
-          img,
-          lat: this.state.lat,
-          lng: this.state.lng
-        })
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
-    });
-  }
-
   pause() {
     const { recordStatus } = this.state;
     if (recordStatus === "Pause") {
@@ -114,16 +96,47 @@ export default class JabberMainPage extends Component {
       this.mediaRecorder.pause();
     }
   }
+
+  async saveAudio() {
+    const uid = firebase.auth().currentUser.uid;
+    const name = firebase.auth().currentUser.displayName;
+    const img = firebase.auth().currentUser.photoURL;
+    const date = new Date().toString().substr(0, 24);
+    const blob = await new Blob(this.chunks, { type: "audio/webm" });
+    const blobURL = window.URL.createObjectURL(blob);
+    this.setState({ blob, blobURL });
+    await storage
+      .ref("audio/")
+      .child(`${name}: ${uid}/${date}`)
+      .put(this.state.blob);
+    const folderReturn = storage.ref(`audio/${name}: ${uid}/${date}`);
+    folderReturn.getDownloadURL().then(res => {
+      axios
+        .post("/api/sendUserInfo", {
+          name,
+          uid,
+          date,
+          URL: res,
+          lat: this.state.lat,
+          lng: this.state.lng,
+          img
+        })
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
+    });
+  }
+
   render() {
-    console.log(auth.currentUser);
+    console.log(this.state.lat, this.state.lng);
     const { recording } = this.state;
     return (
-      <div>
-        <div className="camera">
-          {!auth.currentUser ? <Redirect to="/" /> : null}
+      <div className="camera">
+        <AppNavigation />
+        {!auth.currentUser ? <Redirect to="/" /> : null}
+        <section className={styles.main_page_top}>
           <div className={styles.logo}>
-            <h1>Jabber</h1>
-            {auth.currentUser ? <h3>{auth.currentUser.displayName}</h3> : null}
+            <img src={Icon} />
+            {/* {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null} */}
           </div>
           <div className={styles.recorder_area}>
             <audio controls src={this.state.blobURL} />
@@ -131,11 +144,13 @@ export default class JabberMainPage extends Component {
               <section className={styles.button_space}>
                 {!recording ? (
                   <>
-                    <img
-                      onClick={e => this.startUpMedia(e)}
-                      className={styles.recordBtn}
-                      src={recordButton}
-                    />
+                    <div className={styles.mic_button}>
+                      <img
+                        onClick={e => this.startUpMedia(e)}
+                        className={styles.recordBtn}
+                        src="http://chittagongit.com/download/21707"
+                      />
+                    </div>
                   </>
                 ) : (
                   <>
@@ -156,8 +171,10 @@ export default class JabberMainPage extends Component {
             )}
           </div>
           {recording ? <h3>Recording...</h3> : null}
-          {/* <LoadJabs /> */}
-        </div>
+        </section>
+        <section className={styles.main_page_bottom}>
+          <h1>hello, this is the bottom section of Jabber Main Page</h1>
+        </section>
       </div>
     );
   }

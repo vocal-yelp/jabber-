@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
-import jabberPin from "../Pics/jabber-Icon.png";
+import AppNavigation from "../AppNavigation/AppNavigation";
+import icon from "../Pics/mouth.png";
+import Icon from "../Pics/jabber-Icon-final.png";
+
 import Axios from "axios";
 
 const mapStyles = {
@@ -71,6 +74,11 @@ class MapContainer extends Component {
           name={clip.name}
           img={clip.img}
           date={clip.date}
+          icon={{
+            url: icon,
+            anchor: new window.google.maps.Point(32, 32),
+            scaledSize: new window.google.maps.Size(48, 48)
+          }}
         />
       );
     });
@@ -78,27 +86,35 @@ class MapContainer extends Component {
 
   render() {
     return (
-      <Map
-        google={this.props.google}
-        style={mapStyles}
-        center={{ lat: this.state.lat, lng: this.state.lng }}
-        zoom={16}
-        onClick={this.onMapClicked}
-      >
-        {this.displayMarkers()}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          // onOpen={this.windowHasOpened}
+      <div>
+        <AppNavigation />
+        <div className={styles.div2}>
+          <img className={styles.logo} src={Icon} />
+          <h1 className={styles.title}>-EXPLORE JABS-</h1>
+        </div>
+        <Map
+          className={styles.map}
+          google={this.props.google}
+          style={mapStyles}
+          center={{ lat: this.state.lat, lng: this.state.lng }}
+          zoom={16}
+          onClick={this.onMapClicked}
         >
-          <div>
-            <h1>{this.state.selectedPlace.name}</h1>
-            <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
-            <audio controls src={this.state.selectedPlace.audio} />
-            <img src={this.state.selectedPlace.img} />
-          </div>
-        </InfoWindow>
-      </Map>
+          {this.displayMarkers()}
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            // onOpen={this.windowHasOpened}
+          >
+            <div className={styles.info_window}>
+              <img src={this.state.selectedPlace.img} />
+              <h1>{this.state.selectedPlace.name}</h1>
+              <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
+              <audio controls src={this.state.selectedPlace.audio} />
+            </div>
+          </InfoWindow>
+        </Map>
+      </div>
     );
   }
 }

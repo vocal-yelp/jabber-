@@ -21,6 +21,13 @@
 .Icon {
   height: 25vh;
 }
+.auth {
+  // border: 1px solid red;
+}
+.auth:hover {
+  color: rgb(255, 143, 143);
+  transform: scale(1.01);
+}
 
 @media (max-width: 800px) {
   .div1 {
@@ -70,7 +77,7 @@
   }
   .Icon2 {
     height: 16vh;
-    // border: 1px solid black;
     margin: 5%;
+    // border: 1px solid black;
   }
 }
