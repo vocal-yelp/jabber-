@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
-import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { Link, Redirect } from "react-router-dom";
 import AppNavigation from "../AppNavigation/AppNavigation";
+import mouth from './mouth.mp4'
 
 const storage = firebase.storage();
 const auth = firebase.auth();
@@ -141,24 +142,17 @@ export default class JabberMainPage extends Component {
             <audio controls src={this.state.blobURL} />
             {auth.currentUser ? (
               <section className={styles.button_space}>
-                {!recording ? (
-                  <>
                     <div className={styles.mic_button}>
-                      <img
+                      {!recording ? (<img
                         onClick={e => this.startUpMedia(e)}
                         className={styles.recordBtn}
                         src="http://chittagongit.com/download/21707"
-                      />
+                      />) : <img
+                      onClick={e => this.stopRecording(e)}
+                      className={styles.recordBtn}
+                      src="https://www.freeiconspng.com/uploads/music-round-sound-stop-stop-button-technology-icon-15.png"
+                    />}
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={e => this.stopRecording(e)}>Submit</button>
-                    <button onClick={() => this.pause()}>
-                      {this.state.recordStatus}
-                    </button>
-                  </>
-                )}
               </section>
             ) : (
               <div>

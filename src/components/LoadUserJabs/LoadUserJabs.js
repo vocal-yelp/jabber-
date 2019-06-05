@@ -56,9 +56,6 @@ export default class LoadUserJabs extends Component {
     return (
       <div>
         {clips}
-        <Link to="/JabberMainPage">
-          <button>Jabber</button>
-        </Link>
       </div>
     );
   }
