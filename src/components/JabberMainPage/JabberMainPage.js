@@ -3,8 +3,9 @@ import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
-import css from "./toast.css";
+import { ReactMic } from "react-mic";
 import "react-toastify/dist/ReactToastify.css";
+import "./visual.css";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import axios from "axios";
 
@@ -60,7 +61,7 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: true });
   }
 
-  notify = () => toast("Check the map dude!");
+  notify = () => toast("Posted to map");
 
   stopRecording(e) {
     e.preventDefault();
@@ -141,6 +142,14 @@ export default class JabberMainPage extends Component {
             <h1>Jabber</h1>
             {/* {auth.currentUser ? (<h3>{auth.currentUser.displayName}</h3>) : null} */}
           </div>
+          <ReactMic
+            record={this.state.recording}
+            className="sound-wave"
+            onStop={this.state.stopRecording}
+            onData={this.onData}
+            strokeColor="white"
+            backgroundColor="#37BCDE"
+          />
           <div className={styles.recorder_area}>
             <audio controls src={this.state.blobURL} />
             {auth.currentUser ? (
@@ -175,9 +184,7 @@ export default class JabberMainPage extends Component {
           </div>
           {recording ? <h3>Recording...</h3> : null}
         </section>
-        <section className={styles.main_page_bottom}>
-          {/* <h1>hello, this is the bottom section of Jabber Main Page</h1> */}
-        </section>
+        <section className={styles.main_page_bottom} />
       </div>
     );
   }

@@ -71,7 +71,7 @@ class MapContainer extends Component {
           audio={clip.URL}
           name={clip.name}
           img={clip.img}
-          date={clip.date}
+          date={clip.date.substr(0, 21)}
           icon={{
             url: icon,
             anchor: new window.google.maps.Point(32, 32),
@@ -98,7 +98,7 @@ class MapContainer extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
-            // onOpen={this.windowHasOpened}
+            div={<div />}
           >
             <div className={styles.info_window}>
               <img src={this.state.selectedPlace.img} />

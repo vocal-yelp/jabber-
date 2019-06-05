@@ -24,9 +24,7 @@ class ProfilePage extends Component {
           </div>
           <LoadUserJabs />
         </section>
-        <section className={styles.profile_page_bottom}>
-          <h1>hello, this is the bottom section of Jabber Main Page</h1>
-        </section>
+        <section className={styles.profile_page_bottom} />
       </div>
     );
   }
