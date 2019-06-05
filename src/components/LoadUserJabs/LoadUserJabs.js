@@ -55,11 +55,7 @@ export default class LoadUserJabs extends Component {
         </div>
       );
     });
-<<<<<<< HEAD
-    return <div>{clips}</div>;
-=======
 
     return <div className={styles.buttons}>{clips}</div>;
->>>>>>> master
   }
 }

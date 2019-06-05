@@ -6,10 +6,6 @@ import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { ReactMic } from "react-mic";
 import "react-toastify/dist/ReactToastify.css";
-<<<<<<< HEAD
-import "./visual.css";
-=======
->>>>>>> master
 import AppNavigation from "../AppNavigation/AppNavigation";
 import axios from "axios";
 
@@ -139,24 +135,12 @@ export default class JabberMainPage extends Component {
           draggable
           pauseOnHover
         />
-<<<<<<< HEAD
-
-=======
->>>>>>> master
         {!auth.currentUser ? <Redirect to="/" /> : null}
         <section className={styles.main_page_top}>
           <div className={styles.logo}>
             {/* <img src={jabber} /> */}
             <h1>Record</h1>
           </div>
-          <ReactMic
-            record={this.state.recording}
-            className="sound-wave"
-            onStop={this.state.stopRecording}
-            onData={this.onData}
-            strokeColor="white"
-            backgroundColor="#37BCDE"
-          />
           <div className={styles.recorder_area}>
             <audio controls src={this.state.blobURL} />
             <ReactMic
