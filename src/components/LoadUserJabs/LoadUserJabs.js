@@ -44,15 +44,22 @@ export default class LoadUserJabs extends Component {
   render() {
     const clips = this.state.userJabs.map((clip, index) => {
       return (
-        <div key={index}>
-          <div className={styles.user_clips}>
-            <audio controls src={clip.URL} />
-            <button onClick={() => this.deleteJab(clip.date)}>X</button>
+        <div className={styles.mainDiv} key={index}>
+          <div className={styles.div2}>
+            <div className={styles.user_clips}>
+              <audio controls src={clip.URL} />
+              <button onClick={() => this.deleteJab(clip.date)}>X</button>
+            </div>
+            <h6>{clip.date}</h6>
           </div>
-          <h6>{clip.date}</h6>
         </div>
       );
     });
+<<<<<<< HEAD
     return <div>{clips}</div>;
+=======
+
+    return <div className={styles.buttons}>{clips}</div>;
+>>>>>>> master
   }
 }

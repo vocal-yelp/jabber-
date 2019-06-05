@@ -6,35 +6,54 @@
     flex-direction: column;
     width: 100%;
     height: 20vh;
-    margin: 10px 0px 25px 0px;
+    margin: 2.5em 0px 0em 0px;
     justify-content: center;
     align-items: center;
     // border: 2px solid black;
 
-    .logo2 {
-      margin-top: 20%;
-      height: 50%;
-      width: 50%;
+    img {
+      height: 3em;
+      width: 3em;
+    }
+
+    h1 {
+      margin: 0px;
     }
   }
-  .greeting {
-    margin-bottom: 2%;
-  }
+
   .recorder_area {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    height: 20em;
+    // border: 2px solid black;
     // @include border;
 
     audio {
-      margin-bottom: 10px;
-      width: 60%;
+      // margin-bottom: 10px;
+      // border: 2px solid black;
+      height: 3em;
+      width: 15em;
+      margin-bottom: 3em;
+    }
+
+    .sound_wave {
+      border-radius: 50px;
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+      width: 30em;
+    }
+
+    @media (max-width: 600px) {
+      .sound_wave {
+        border-radius: 50px;
+        box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+        width: 17.5em;
+      }
     }
 
     .button_space {
-      margin-top: 10%;
+      // border: 2px solid black;
       width: 100%;
       display: flex;
       justify-content: space-around;
@@ -42,6 +61,10 @@
       .mic_button {
         height: 5em;
         width: 5em;
+<<<<<<< HEAD
+=======
+        margin-top: 3em;
+>>>>>>> master
         border-radius: 50%;
         background-color: rgb(255, 255, 255);
         display: flex;
@@ -53,6 +76,10 @@
           height: 3em;
           width: 3em;
         }
+      }
+
+      h3 {
+        border: 2px solid black;
       }
     }
 
@@ -71,18 +98,12 @@
     }
   }
 
-  .map_box {
-    height: 30vh;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 10%;
-    border: 2px solid black;
-    h1 {
-      color: rgb(8, 8, 8);
-    }
-    img {
-      width: 100%;
-      height: 100%;
-    }
+  .main_page_bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    width: 100%;
+    background-color: rgb(18, 18, 20);
   }
 }
