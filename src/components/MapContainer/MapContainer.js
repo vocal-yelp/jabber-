@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-import AppNavigation from "../AppNavigation/AppNavigation";
-import Axios from "axios";
 import styles from "./MapContainer.module.scss";
+import AppNavigation from "../AppNavigation/AppNavigation";
+import mouth from "../Pics/mouth.png";
 import icon from "../Pics/logo.png";
-import like from "./like.png";
-import liked from "./liked.png";
+
+import Axios from "axios";
 
 const mapStyles = {
   width: "100%",
@@ -18,7 +18,6 @@ class MapContainer extends Component {
     super(props);
 
     this.state = {
-      clicked: true,
       markerClips: [],
       showingInfoWindow: false,
       activeMarker: {},
@@ -55,21 +54,11 @@ class MapContainer extends Component {
     });
 
   onMapClicked = props => {
-    console.log("map");
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         activeMarker: null
       });
-    }
-  };
-
-  like = e => {
-    console.log("like");
-    if (document.getElementsByClassName("like").src === { like }) {
-      document.getElementsByClassName("like").src = { liked };
-    } else {
-      document.getElementsByClassName("like").src = { like };
     }
   };
 
@@ -86,7 +75,7 @@ class MapContainer extends Component {
           img={clip.img}
           date={clip.date}
           icon={{
-            url: icon,
+            url: mouth,
             anchor: new window.google.maps.Point(32, 32),
             scaledSize: new window.google.maps.Size(48, 48)
           }}
@@ -99,6 +88,10 @@ class MapContainer extends Component {
     return (
       <div>
         <AppNavigation />
+        <div className={styles.div2}>
+          <img className={styles.logo} src={icon} />
+          <h1 className={styles.title}> EXPLORE JABS </h1>
+        </div>
         <Map
           className={styles.map}
           google={this.props.google}
@@ -114,13 +107,10 @@ class MapContainer extends Component {
             // onOpen={this.windowHasOpened}
           >
             <div className={styles.info_window}>
-              <img src={this.state.selectedPlace.img}/>
+              <img src={this.state.selectedPlace.img} />
               <h1>{this.state.selectedPlace.name}</h1>
               <h3 className={styles.date}>{this.state.selectedPlace.date}</h3>
-              <div className={styles.like_audio_strip}>
-                <img className={styles.like} src={(this.state.clicked ? liked : like)} onClick={() => this.setState({clicked: false})} />
-                <audio controls src={this.state.selectedPlace.audio} />
-              </div>
+              <audio controls src={this.state.selectedPlace.audio} />
             </div>
           </InfoWindow>
         </Map>

@@ -1,22 +1,31 @@
 @import "../SassMixinsandVariables.scss";
 @import "./ProfilePageMobile.module.scss";
 
+.jabs_body {
+  height: 100%;
+}
+
 .profile_page_top {
-  height: 80vh;
+  height: 85vh;
   width: 100%;
 }
 
 .delete_icon {
   width: 80%;
-  margin: 20px 0px 0px 10%;
+  margin: 20px 0px 1em 10%;
   color: $JabberBlue;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+
+  h1 {
+    font-family: pacifico;
+  }
+
   img {
-    width: 80px;
-    height: 80px;
+    width: 8em;
+    height: 5em;
   }
 }
 
@@ -24,8 +33,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 15vh;
+  height: 10vh;
   width: 100%;
+  position: fixed;
+  bottom: 0;
   background-color: rgb(18, 18, 20);
 
   h1 {
