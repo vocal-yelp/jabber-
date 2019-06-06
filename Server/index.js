@@ -20,6 +20,13 @@ app.get("/api/loadJabs", loadJabs);
 app.get("/api/loadUserJabs/:id", loadUserJabs);
 app.delete("/api/deleteJab/", deleteJab);
 
+/////////////// testing ///////////////////////
+app.get("/", (req, res) => {
+  res.status(200).send("working");
+});
+
 app.listen(SERVER_PORT, () => {
   console.log(`tuning in to ${SERVER_PORT}`);
 });
+
+module.exports = app;

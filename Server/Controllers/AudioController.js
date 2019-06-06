@@ -76,8 +76,4 @@ module.exports = {
       })
       .catch(err => console.log("no"));
   }
-
-  // deleteOldJabs: () => {
-
-  // }
 };
