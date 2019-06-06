@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
 import styles from "./ProfilePage.module.scss";
 import sadlip from "./sadlip.png";
@@ -22,7 +23,16 @@ class ProfilePage extends Component {
           </div>
           <LoadUserJabs />
         </section>
-        <section className={styles.profile_page_bottom} />
+        <section className={styles.profile_page_bottom}>
+          <div className={styles.mic_button}>
+            <Link to="/JabberMainPage">
+              <img
+                className={styles.recordBtn}
+                src="http://chittagongit.com/download/21707"
+              />
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
