@@ -14,6 +14,8 @@ export default class LoadJabs extends Component {
     };
   }
 
+  //Jab blob stored
+
   componentDidMount() {
     axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
