@@ -5,8 +5,7 @@ import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import mouth from "../Pics/mouth.png";
 import icon from "../Pics/logo.png";
-
-import axios from "axios";
+import Axios from "axios";
 
 const mapStyles = {
   width: "100%",
@@ -31,21 +30,19 @@ class MapContainer extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    axios.get("/api/loadJabs").then(res => {
+    Axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
-      )
-      .then(res => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
         this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
         });
-      });
-    console.log(this.state.lat, this.state.lng);
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   onMarkerClick = (props, marker, e) =>
