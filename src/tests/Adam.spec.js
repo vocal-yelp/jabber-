@@ -1,7 +1,6 @@
 const request = require("supertest");
 const assert = require("assert");
 const app = require("../../Server/index");
-const { divide } = require("./operations");
 
 describe("checking tests", () => {
   it("sums numbers", () => {
@@ -16,15 +15,19 @@ describe("Test the root path", () => {
       .expect(200);
   });
 });
+describe("array to equal correct values", () => {
+  test("Array should = [1,2,3]", () => {
+    expect([1, 2, 3]).toEqual([1, 2, 3]);
+  });
+});
 
-// // it("correctly calculates the sum of 15 and 20", () => {
-// //   assert.equal(operations.add(15, 20), 25);
-// // });
-
-// // it("correctly calculates the difference of 10 and 0", () => {
-// //   assert.equal(operations.subtract(10, 10), 0);
-// // });
-
-// it("correctly calculates the quotient of 10 and 2", () => {
-//   assert.equal(operations.divide(10, 2), 5);
-// });
+describe("map style size", () => {
+  test("height to equal 60vh", () => {
+    expect(mapStyles.height).toBe("60vh");
+  });
+});
+describe("Recording property:", function() {
+  test("Recording should default to false.", function() {
+    expect(Recording).toBe(false);
+  });
+});
