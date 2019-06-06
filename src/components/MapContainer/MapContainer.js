@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
+import { Link } from "react-router-dom";
 import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import mouth from "../Pics/mouth.png";
@@ -116,6 +117,16 @@ class MapContainer extends Component {
             </div>
           </InfoWindow>
         </Map>
+        <section className={styles.profile_page_bottom}>
+          <div className={styles.mic_button}>
+            <Link to="/JabberMainPage">
+              <img
+                className={styles.recordBtn}
+                src="http://chittagongit.com/download/21707"
+              />
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
