@@ -46,7 +46,7 @@
   .info_window {
     width: 300px;
     height: 200px;
-    // background-color: blue;
+    background-color: rgb(238, 238, 245);
     h1 {
       font-size: 1.5em;
     }
@@ -57,6 +57,9 @@
       height: 50px;
       width: 50px;
       border-radius: 50%;
+    }
+    audio {
+      outline: none;
     }
   }
 }
@@ -109,6 +112,11 @@
     width: 300px;
     height: 200px;
     // background-color: blue;
+    img {
+      height: 3em;
+      width: 3em;
+      border-radius: 50%;
+    }
     h1 {
       font-size: 1.5em;
     }
