@@ -2,11 +2,12 @@
 // // Has access to flex-center mixin
 
 body {
-  background-color: rgb(227, 229, 240);
+  background-color: $JabberYellow;
+  outline: none;
 }
 
 .main_page_top {
-  height: 80vh;
+  height: 85vh;
   width: 100%;
 }
 
@@ -14,34 +15,22 @@ body {
   display: flex;
   // flex-direction: column;
   width: 100%;
-  height: 35vh;
-  // width: 20vw;
-  margin-top: 20px;
-  // padding: 20px;
+  height: 15vh;
+  margin: 2em 0px 0em 0px;
   justify-content: center;
   align-items: center;
   // border: 2px solid black;
 
+  img {
+    height: 5em;
+    width: 5em;
+  }
+
   h1 {
     font-size: 2.5em;
+    margin: 0em 0px 0px 0px;
     color: $JabberBlue;
     font-family: "Pacifico", cursive;
-  }
-  h1:hover {
-    color: $JabberBlue;
-    font-family: "Pacifico", cursive;
-  }
-  h3 {
-    color: $JabberBlue;
-  }
-
-  h3 {
-    color: $JabberBlue;
-  }
-
-  img {
-    height: 20vh;
-    // width: 15%;
   }
 }
 
@@ -55,22 +44,31 @@ body {
 }
 .recorder_area {
   @include flex-center;
-  height: 30vh;
-  // border: 2px solid black;
+  height: 60vh;
 
   audio {
-    height: 12vh;
+    height: 5vh;
+    width: 300px;
+    margin-bottom: 5em;
+    outline: none;
+    // background-color: rgb(240, 240, 240);
     // border: 2px solid black;
   }
 
+  .sound_wave {
+    border-radius: 50px;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+    width: 40em;
+  }
+
   .button_space {
-    margin-top: 1em;
     width: 100%;
     display: flex;
     justify-content: space-around;
 
     .mic_button {
       // border: 2px solid black;
+      margin-top: 5em;
       height: 10em;
       width: 10em;
       border-radius: 50%;
@@ -99,17 +97,6 @@ body {
     background-color: rgb(22, 22, 49);
     border-color: rgb(0, 140, 255);
     color: white;
-  }
-
-  .map_box {
-    height: 20vh;
-    width: 90%;
-    margin-left: 5%;
-    @include border;
-
-    h1 {
-      color: red;
-    }
   }
 }
 // @media (min-width: 800px) {
@@ -191,9 +178,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 15vh;
+  height: 10vh;
   width: 100%;
-  background-color: rgb(18, 18, 20);
+  background-color: $JabberBlue;
 
   h1 {
     color: white;

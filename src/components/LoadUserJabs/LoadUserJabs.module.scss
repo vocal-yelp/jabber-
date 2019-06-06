@@ -4,8 +4,10 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 20vh;
+  margin-bottom: 4em;
+  height: 15em;
   width: 100vw;
+
   h6 {
     // height: 4%;
     // border: 1px solid rgb(0, 225, 255);
@@ -36,9 +38,12 @@
   button {
     height: 2em;
     width: 2em;
-    background-color: $JabberBlue;
-    color: white;
+    border-radius: 100%;
+    background-color: white;
+    color: $JabberBlue;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1.5em;
     border: none;
-    margin: 20px;
+    margin: 1em 0em 1em 0em;
   }
 }

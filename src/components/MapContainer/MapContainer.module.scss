@@ -1,3 +1,5 @@
+@import "../SassMixinsandVariables.scss";
+
 @media (min-width: 800px) {
   .div2 {
     // border: 2px solid red;
@@ -17,18 +19,19 @@
       // border: 2px solid red;
     }
   }
+
   .title {
-    font-size: 80px;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 3em;
+    font-family: pacifico, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 100;
     // margin-right: 15%;
     margin: 0%;
-
     width: 100vw;
     justify-content: center;
-    color: rgb(58, 58, 58);
+    color: $JabberBlue;
     // border: 2px solid red;
   }
+
   .map {
     height: 100%;
     width: 100%;
@@ -77,9 +80,10 @@
       // border: 2px solid red;
     }
   }
+
   .title {
-    font-size: 40px;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    font-family: pacifico, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 100;
     // margin-right: 15%;
     margin: 0%;
@@ -112,3 +116,20 @@
     }
   }
 }
+
+@media (max-width: 650px) {
+  .MapContainer {
+    .logo {
+      display: none;
+    }
+    .map {
+      height: 50vh;
+    }
+    h1 {
+      display: none;
+      color: red;
+    }
+  }
+}
+
+@import "./MapContainerMobile.module.scss";

@@ -3,8 +3,8 @@ import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
-import icon from "../Pics/mouth.png";
-import Icon from "../Pics/jabber-Icon-final.png";
+import mouth from "../Pics/mouth.png";
+import icon from "../Pics/logo.png";
 
 import Axios from "axios";
 
@@ -75,7 +75,7 @@ class MapContainer extends Component {
           img={clip.img}
           date={clip.date}
           icon={{
-            url: icon,
+            url: mouth,
             anchor: new window.google.maps.Point(32, 32),
             scaledSize: new window.google.maps.Size(48, 48)
           }}
@@ -89,8 +89,8 @@ class MapContainer extends Component {
       <div>
         <AppNavigation />
         <div className={styles.div2}>
-          <img className={styles.logo} src={Icon} />
-          <h1 className={styles.title}>-EXPLORE JABS-</h1>
+          <img className={styles.logo} src={icon} />
+          <h1 className={styles.title}> EXPLORE JABS </h1>
         </div>
         <Map
           className={styles.map}
