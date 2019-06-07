@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
-import jabber from "../Pics/logo.png";
+import mouth from "../Pics/mouth.png";
 import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { ReactMic } from "react-mic";
@@ -31,15 +31,18 @@ export default class JabberMainPage extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
+    axios
+      .post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`,
+        { considerIp: true }
+      )
+      .then(res => {
         this.setState({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: res.data.location.lat,
+          lng: res.data.location.lng
         });
-        console.log(this.state.lat, this.state.lng);
-      }.bind(this)
-    );
+      });
+    console.log(this.state.lat, this.state.lng);
   }
 
   componentDidMount() {
@@ -48,7 +51,8 @@ export default class JabberMainPage extends Component {
     });
     axios
       .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`,
+        { considerIp: false }
       )
       .then(res => {
         this.setState({
@@ -195,7 +199,13 @@ export default class JabberMainPage extends Component {
           </div>
           {recording ? <h3>Recording...</h3> : null}
         </section>
-        <section className={styles.main_page_bottom} />
+        <section className={styles.main_page_bottom}>
+          <div className={styles.mic_button}>
+            <Link to="/MapContainer">
+              <img className={styles.mapBtn} src={mouth} />
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }

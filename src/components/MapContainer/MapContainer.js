@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
+import { Link } from "react-router-dom";
 import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import mouth from "../Pics/mouth.png";
 import icon from "../Pics/logo.png";
 
-import Axios from "axios";
+import axios from "axios";
 
 const mapStyles = {
   width: "100%",
@@ -31,19 +32,21 @@ class MapContainer extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    Axios.get("/api/loadJabs").then(res => {
+    axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
-    navigator.geolocation.getCurrentPosition(
-      function(position) {
+    axios
+      .post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
+      )
+      .then(res => {
         this.setState({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lat: res.data.location.lat,
+          lng: res.data.location.lng
         });
-        console.log(this.state.lat, this.state.lng);
-      }.bind(this)
-    );
+      });
+    console.log(this.state.lat, this.state.lng);
   }
 
   onMarkerClick = (props, marker, e) =>
@@ -73,7 +76,7 @@ class MapContainer extends Component {
           audio={clip.URL}
           name={clip.name}
           img={clip.img}
-          date={clip.date}
+          date={clip.date.substr(0, 21)}
           icon={{
             url: mouth,
             anchor: new window.google.maps.Point(32, 32),
@@ -114,6 +117,16 @@ class MapContainer extends Component {
             </div>
           </InfoWindow>
         </Map>
+        <section className={styles.profile_page_bottom}>
+          <div className={styles.mic_button}>
+            <Link to="/JabberMainPage">
+              <img
+                className={styles.recordBtn}
+                src="http://chittagongit.com/download/21707"
+              />
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
