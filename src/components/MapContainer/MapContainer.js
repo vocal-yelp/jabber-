@@ -36,17 +36,15 @@ class MapContainer extends Component {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`
-      )
-      .then(res => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
         this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
         });
-      });
-    console.log(this.state.lat, this.state.lng);
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   onMarkerClick = (props, marker, e) =>

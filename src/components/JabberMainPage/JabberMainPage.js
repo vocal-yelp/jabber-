@@ -27,39 +27,20 @@ export default class JabberMainPage extends Component {
       lng: ""
     };
   }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user: true });
-    });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`,
-        { considerIp: true }
-      )
-      .then(res => {
-        this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
-        });
-      });
-    console.log(this.state.lat, this.state.lng);
-  }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    axios
-      .post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyC-70FsKd0Z62aOs5kYoFsuW6TY-9whBUw`,
-        { considerIp: false }
-      )
-      .then(res => {
+    navigator.geolocation.getCurrentPosition(
+      function(position) {
         this.setState({
-          lat: res.data.location.lat,
-          lng: res.data.location.lng
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
         });
-      });
+        console.log(this.state.lat, this.state.lng);
+      }.bind(this)
+    );
   }
 
   async startUpMedia(e) {
