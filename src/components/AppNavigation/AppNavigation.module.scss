@@ -1,5 +1,4 @@
 @import "../SassMixinsandVariables.scss";
-@import "./AppNavigationMobile.module.scss";
 
 .navbar {
   width: 100%;
@@ -22,3 +21,5 @@
     background-color: rgb(236, 239, 243);
   }
 }
+
+@import "./AppNavigationMobile.module.scss";
