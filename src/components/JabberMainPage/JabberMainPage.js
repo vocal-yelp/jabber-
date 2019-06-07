@@ -46,8 +46,6 @@ export default class JabberMainPage extends Component {
     console.log(this.state.lat, this.state.lng);
   }
 
-<<<<<<< HEAD
-=======
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
@@ -65,7 +63,6 @@ export default class JabberMainPage extends Component {
       });
   }
 
->>>>>>> master
   async startUpMedia(e) {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     this.mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
