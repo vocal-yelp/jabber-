@@ -28,7 +28,7 @@ export default class JabberMainPage extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
@@ -69,23 +69,6 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: false });
     this.saveAudio();
     this.notify();
-  }
-
-  pause() {
-    const { recordStatus } = this.state;
-    if (recordStatus === "Pause") {
-      this.setState({ recordStatus: "Resume" });
-    } else {
-      this.setState({ recordStatus: "Pause" });
-    }
-    if (recordStatus === "Resume") {
-      this.mediaRecorder.resume();
-    }
-    if (recordStatus === "Resume") {
-      this.mediaRecorder.resume();
-    } else {
-      this.mediaRecorder.pause();
-    }
   }
 
   async saveAudio() {

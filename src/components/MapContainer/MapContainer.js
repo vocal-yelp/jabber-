@@ -28,7 +28,7 @@ class MapContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
@@ -98,6 +98,7 @@ class MapContainer extends Component {
           google={this.props.google}
           style={mapStyles}
           center={{ lat: this.state.lat, lng: this.state.lng }}
+          initialCenter={{ lat: this.state.lat, lng: this.state.lng }}
           zoom={16}
           onClick={this.onMapClicked}
         >
