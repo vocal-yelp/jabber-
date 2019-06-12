@@ -10,4 +10,5 @@ Jabber was inspired by the lack of audio based social medias. We wanted to creat
 For our technologies, we planned on using React, Express, and Node.js. However, we also wanted to push ourselves into new territory with this project. We understood the user experience should be sleek and uninterrupted. We chose SASS for writing out the UX, allowing us to keep of files readable and concise for ourselves and our team. Building forward, we needed a way to store user media files. FireBase seemed to be an appropriate coupling due to the fact we'd be needing the Google Maps API later on. Initially implementing for the sole purpose of blob storage, we made a unanimous decision to further utilize FireBase for it's FireStore database. As well as user authentication.
 
 ## Pictures
+![J-login](https://user-images.githubusercontent.com/22803685/59383623-48266a80-8d2e-11e9-819d-083269c81751.png)
 
