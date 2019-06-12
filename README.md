@@ -15,10 +15,9 @@ For our technologies, we planned on using React, Express, and Node.js. However, 
 Jabber - login
 
 ![J-record](https://user-images.githubusercontent.com/22803685/59383718-7efc8080-8d2e-11e9-9d5d-b9dcaa6f1acd.PNG)
-
-Jabber - record a jab: record and store a user voice clip for sharing with other users. 
-
 ![J-map](https://user-images.githubusercontent.com/22803685/59383801-aeab8880-8d2e-11e9-8a09-e8addc638554.PNG)
+
+Jabber - record a jab: record and store a user voice clip for sharing with other users.
 
 Jabber - view jab network: render out audio attached markers according to current lat and lng of user.
 
