@@ -12,21 +12,24 @@ For our technologies, we planned on using React, Express, and Node.js. However, 
 ## Pictures
 ![J-login](https://user-images.githubusercontent.com/22803685/59383623-48266a80-8d2e-11e9-819d-083269c81751.png)
 
-### login
+### Login
 
 ![J-record](https://user-images.githubusercontent.com/22803685/59383718-7efc8080-8d2e-11e9-9d5d-b9dcaa6f1acd.PNG)
 ![J-map](https://user-images.githubusercontent.com/22803685/59383801-aeab8880-8d2e-11e9-8a09-e8addc638554.PNG)
 
-### record a jab: 
+### Record a Jab: 
 record and store a user voice clip for sharing with other users.
 
-### view jab network:
+### View Jab Network:
 render out audio attached markers according to current lat and lng of user.
 
 ![J-removal](https://user-images.githubusercontent.com/22803685/59383898-f3cfba80-8d2e-11e9-8292-de4597599a55.PNG)
 
-### remove a jab:
+### Remove a Jab:
 remove from the database, a jab belonging to the user.
+
+## Contact
+The member of this project are Peter Hart, Adam Mckenzie and Anand Tsogtbaater. If you have questions, suggestions or would like to reach out to one of us. Our emails are Peterwilloughbybusiness@gmail.com and ________ respectably. 
 
 
 
