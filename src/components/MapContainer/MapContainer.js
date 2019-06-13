@@ -6,8 +6,7 @@ import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import mouth from "../Pics/mouth.png";
 import icon from "../Pics/logo.png";
-
-import axios from "axios";
+import Axios from "axios";
 
 const mapStyles = {
   width: "100%",
@@ -32,7 +31,7 @@ class MapContainer extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
-    axios.get("/api/loadJabs").then(res => {
+    Axios.get("/api/loadJabs").then(res => {
       console.log(res.data);
       this.setState({ markerClips: res.data });
     });
@@ -105,7 +104,7 @@ class MapContainer extends Component {
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
-            // onOpen={this.windowHasOpened}
+            div={<div />}
           >
             <div className={styles.info_window}>
               <img src={this.state.selectedPlace.img} />

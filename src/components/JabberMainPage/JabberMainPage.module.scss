@@ -71,6 +71,7 @@ body {
       box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
 
       .recordBtn {
+        // border: 2px solid black;
         height: 5em;
         width: 5em;
       }
@@ -124,5 +125,13 @@ body {
     background-color: rgb(236, 239, 243);
   }
 }
+
+// .recorder_area img:first-of-type {
+//   border: rgb(179, 133, 133) solid 3px;
+// }
+
+// button {
+//   border: 2px solid red;
+// }
 
 @import "./JabberMainPageMobile.module.scss";

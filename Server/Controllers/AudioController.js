@@ -1,6 +1,4 @@
 const firebase = require("firebase");
-// const storage = require('firebase/storage')
-// const firebase = require('../../src/components/firebase/index')
 
 firebase.initializeApp({
   apiKey: process.env.API_KEY,
@@ -12,8 +10,6 @@ firebase.initializeApp({
   appId: process.env.APP_ID
 });
 
-// const firestorage = firebase.storage();
-
 module.exports = {
   sendUserInfo: (req, res) => {
     const { name, uid, date, URL, lat, lng, img } = req.body;
@@ -23,10 +19,7 @@ module.exports = {
       .doc(`${uid}`)
       .collection(`clips/`)
       .doc(`${date}`)
-      .set({ name, uid, date, URL, lat, lng, img })
-      .then(res => {
-        console.log("All done.");
-      });
+      .set({ name, uid, date, URL, lat, lng, img });
   },
 
   loadJabs: (req, response) => {
@@ -40,9 +33,7 @@ module.exports = {
           clips.push(doc.data());
         });
       })
-      .then(res => response.json(clips))
-      .catch(err => console.log(err));
-    console.log(clips);
+      .then(res => response.json(clips));
   },
 
   loadUserJabs: (req, response) => {
@@ -61,11 +52,9 @@ module.exports = {
       })
       .then(res => response.json(clips))
       .catch(err => console.log(err));
-    console.log(clips);
   },
 
   deleteJab: (req, response) => {
-    console.log("hit");
     const { uid, date } = req.body;
     firebase
       .firestore()
@@ -73,10 +62,10 @@ module.exports = {
       .doc(uid)
       .collection("clips")
       .doc(date)
+
       .delete()
       .then(res => {
         console.log(res, "yes");
-      })
-      .catch(err => console.log("no"));
+      });
   }
 };
