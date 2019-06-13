@@ -29,7 +29,7 @@ render out audio attached markers according to current lat and lng of user.
 remove from the database, a jab belonging to the user.
 
 ## Contact
-The member of this project are Peter Hart, Adam Mckenzie and Anand Tsogtbaater. If you have questions, suggestions or would like to reach out to one of us. Our emails are Peterwilloughbybusiness@gmail.com and mckenziesadam@gmail.com respectably. 
+The member of this project are Peter Hart, Adam Mckenzie and Anand Tsogtbaater. If you have questions, suggestions or would like to reach out to one of us. Our emails are peterwilloughbybusiness@gmail.com and mckenziesadam@gmail.com respectably. 
 
 
 
