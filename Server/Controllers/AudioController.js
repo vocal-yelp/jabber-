@@ -19,10 +19,7 @@ module.exports = {
       .doc(`${uid}`)
       .collection(`clips/`)
       .doc(`${date}`)
-      .set({ name, uid, date, URL, lat, lng, img })
-      .then(res => {
-        console.log("All done.");
-      });
+      .set({ name, uid, date, URL, lat, lng, img });
   },
 
   loadJabs: (req, response) => {
@@ -36,9 +33,7 @@ module.exports = {
           clips.push(doc.data());
         });
       })
-      .then(res => response.json(clips))
-      .catch(err => console.log(err));
-    console.log(clips);
+      .then(res => response.json(clips));
   },
 
   loadUserJabs: (req, response) => {
@@ -57,11 +52,9 @@ module.exports = {
       })
       .then(res => response.json(clips))
       .catch(err => console.log(err));
-    console.log(clips);
   },
 
   deleteJab: (req, response) => {
-    console.log("hit");
     const { uid, date } = req.body;
     firebase
       .firestore()
@@ -73,7 +66,6 @@ module.exports = {
       .delete()
       .then(res => {
         console.log(res, "yes");
-      })
-      .catch(err => console.log("no"));
+      });
   }
 };

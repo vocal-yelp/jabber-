@@ -23,16 +23,6 @@ var firebaseConfig = {
   appId: "1:765924833453:web:90651fb9bd23a801"
 };
 
-console.log(
-  API_KEY,
-  AUTH_DOMAIN,
-  DATABASE_URL,
-  PROJECT_ID,
-  STORAGE_BUCKET,
-  MESSAGING_SENDER_ID,
-  APP_ID
-);
-
 // Initialize Firebase
 
 firebase.initializeApp(firebaseConfig);
