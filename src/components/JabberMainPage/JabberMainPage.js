@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import mouth from "../Pics/mouth.png";
+import record from "../Pics/recordButton.png";
 import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { ReactMic } from "react-mic";
@@ -141,7 +142,7 @@ export default class JabberMainPage extends Component {
                     <img
                       onClick={e => this.startUpMedia(e)}
                       className={styles.recordBtn}
-                      src="http://chittagongit.com/download/21707"
+                      src={record}
                     />
                   ) : (
                     <img
