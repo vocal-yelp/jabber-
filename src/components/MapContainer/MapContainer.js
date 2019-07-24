@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebase from "../firebase/index";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 import { Link } from "react-router-dom";
+import record from "../Pics/recordButton.png";
 import styles from "./MapContainer.module.scss";
 import AppNavigation from "../AppNavigation/AppNavigation";
 import mouth from "../Pics/mouth.png";
@@ -27,7 +28,7 @@ class MapContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
@@ -97,6 +98,7 @@ class MapContainer extends Component {
           google={this.props.google}
           style={mapStyles}
           center={{ lat: this.state.lat, lng: this.state.lng }}
+          initialCenter={{ lat: this.state.lat, lng: this.state.lng }}
           zoom={16}
           onClick={this.onMapClicked}
         >
@@ -117,10 +119,7 @@ class MapContainer extends Component {
         <section className={styles.profile_page_bottom}>
           <div className={styles.mic_button}>
             <Link to="/JabberMainPage">
-              <img
-                className={styles.recordBtn}
-                src="http://chittagongit.com/download/21707"
-              />
+              <img className={styles.recordBtn} src={record} />
             </Link>
           </div>
         </section>

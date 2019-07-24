@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LoadUserJabs from "../LoadUserJabs/LoadUserJabs";
 import styles from "./ProfilePage.module.scss";
 import sadlip from "./sadlip.png";
+import record from "../Pics/recordButton.png";
 import AppNavigation from "../AppNavigation/AppNavigation";
 
 class ProfilePage extends Component {
@@ -26,10 +27,7 @@ class ProfilePage extends Component {
         <section className={styles.profile_page_bottom}>
           <div className={styles.mic_button}>
             <Link to="/JabberMainPage">
-              <img
-                className={styles.recordBtn}
-                src="http://chittagongit.com/download/21707"
-              />
+              <img className={styles.recordBtn} src={record} />
             </Link>
           </div>
         </section>

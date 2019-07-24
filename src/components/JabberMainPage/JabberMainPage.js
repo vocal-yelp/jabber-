@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./JabberMainPage.module.scss";
 import firebase from "../firebase/index";
 import mouth from "../Pics/mouth.png";
+import record from "../Pics/recordButton.png";
 import { Link, Redirect } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import { ReactMic } from "react-mic";
@@ -28,7 +29,7 @@ export default class JabberMainPage extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user: true });
     });
@@ -69,23 +70,6 @@ export default class JabberMainPage extends Component {
     this.setState({ recording: false });
     this.saveAudio();
     this.notify();
-  }
-
-  pause() {
-    const { recordStatus } = this.state;
-    if (recordStatus === "Pause") {
-      this.setState({ recordStatus: "Resume" });
-    } else {
-      this.setState({ recordStatus: "Pause" });
-    }
-    if (recordStatus === "Resume") {
-      this.mediaRecorder.resume();
-    }
-    if (recordStatus === "Resume") {
-      this.mediaRecorder.resume();
-    } else {
-      this.mediaRecorder.pause();
-    }
   }
 
   async saveAudio() {
@@ -158,7 +142,7 @@ export default class JabberMainPage extends Component {
                     <img
                       onClick={e => this.startUpMedia(e)}
                       className={styles.recordBtn}
-                      src="http://chittagongit.com/download/21707"
+                      src={record}
                     />
                   ) : (
                     <img
